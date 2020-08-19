@@ -1,0 +1,101 @@
+﻿{% extends "layout.html" %}
+
+{% block title %}
+    My Profile
+{% endblock %}
+
+{% block main %}
+<div class="container content-block">
+    <div class="row">
+        <div class="col-12">
+            <h1>Your Profile</h1>
+            <hr class="my-4" />
+            <dl class="row">
+                <dt class="col-4">Display Name</dt>
+                <dd class="col-8">{{ user.display_name }}</dd>
+                <dt class="col-4">Country</dt>
+                <dd class="col-8">{{ user.country }}</dd>
+                <dt class="col-4">E-mail</dt>
+                <dd class="col-8">{{ user.email }}</dd>
+                <dt class="col-4">User-id</dt>
+                <dd class="col-8">{{ user.id }}</dd>
+                <dt class="col-4">Followers</dt>
+                <dd class="col-8">{{ user.followers.total }}</dd>
+                <dt class="col-4">Subscription</dt>
+                <dd class="col-8">
+                    {% if user.product == 'premium' %}
+                    Premium
+                    {% else %}
+                    Basic
+                    {% endif %} Account
+                </dd>
+                <dt class="col-4">Playlists</dt>
+                <dd class="col-8">{{ playlists.total }}</dd>
+                <dt class="col-4">Saved Tracks</dt>
+                <dd class="col-8">{{ saved_tracks.total }}</dd>
+                <dt class="col-4">Followed Artists</dt>
+                <dd class="col-8">{{ followed_artists.artists.total }}</dd>
+            </dl>
+        </div>
+    </div>
+</div>
+<div class="container content-block">
+    <div class="row">
+        <div class="col-12">
+            <h1>Your Recently Played Tracks <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-info-circle align-top" width="20" height="20" viewBox="0 0 24 24" stroke-width="2.5" stroke="#414141" fill="none" stroke-linecap="round" stroke-linejoin="round"
+             data-toggle="tooltip" data-placement="top" title="A track currently playing will not be visible in play history until it has completed. A track must be played for more than 30 seconds to be included in play history.">
+            <path stroke="none" d="M0 0h24v24H0z" />
+            <circle cx="12" cy="12" r="9" />
+            <line x1="12" y1="8" x2="12.01" y2="8" />
+            <polyline points="11 12 12 12 12 16 13 16" />
+            </svg></h1>
+            <hr class="my-4" />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <table class="table table-striped table-responsive table-hover datatable-overview bg-white">
+                <thead class="thead-dark">
+                    <tr>
+                        <th class="text-center" scope="col">Track Analytics</th>
+                        <th class="text-center" scope="col">Album image</th>
+                        <th class="text-center" scope="col">Song Name</th>
+                        <th class="text-center" scope="col">Artist</th>
+                        <th class="text-center" scope="col">Explicit Lyrics</th>
+                        <th class="text-center" scope="col">
+                            Popularity
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-info-circle" width="20" height="20" viewBox="0 0 24 24" stroke-width="2.5" stroke="#4CAF50" fill="none" stroke-linecap="round" stroke-linejoin="round"
+                                    data-toggle="tooltip" data-placement="top" title="The popularity is calculated by algorithm and is based, in the most part, on the total number of plays the track has had and how recent those plays are.">
+                                <path stroke="none" d="M0 0h24v24H0z" />
+                                <circle cx="12" cy="12" r="9" />
+                                <line x1="12" y1="8" x2="12.01" y2="8" />
+                                <polyline points="11 12 12 12 12 16 13 16" />
+                            </svg>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for track in recently_played %}
+                    <tr>
+                        <td class="text-center align-middle">
+                            <a href="{{ url_for("track_analytics", track_id=track.track.id) }}" class="btn btn-sm track-analytics-button">View <svg height="20" viewBox="0 0 21 21" width="20" xmlns="http://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd" stroke="#1db954" stroke-linecap="round" stroke-linejoin="round" transform="translate(3 3)"><path d="m.5.5v12c0 1.1045695.8954305 2 2 2h11.5" /><path d="m3.5 8.5v3" /><path d="m7.5 5.5v6" /><path d="m11.5 2.5v9" /></g></svg></a>
+                        </td>
+                        <td class="text-center align-middle"><img class="rounded" src="{{ tracks[loop.index0].album.images[0].url }}" width="50" alt="Album image" /></td>
+                        <td class="text-center align-middle">{{ track.track.name }}</td>
+                        <td class="text-center align-middle">{{ track.track.artists[0].name }}</td>
+                        <td class="text-center align-middle">
+                            {% if track.track.explicit %}
+                            Yes
+                            {% else %}
+                            No
+                            {% endif %}
+                        </td>
+                        <td class="text-center align-middle">{{ tracks[loop.index0].popularity }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

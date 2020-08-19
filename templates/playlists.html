@@ -1,0 +1,159 @@
+﻿{% extends "layout.html" %}
+
+{% block title %}
+{% if name %}
+{{ name }}
+{% else %}
+My Playlists
+{% endif %}
+{% endblock %}
+{% block main %}
+<!-- MODAL CONTAINER -->
+<div class="modal fade" id="partyplanner-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modal-title"></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" id="modal-body">
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-sm" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+{% if all_playlists %}
+<div class="container content-block">
+    <div class="row">
+        <div class="col-12">
+            <h1>Overview of your playlists</h1>
+            <hr class="my-4" />
+        </div>
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-12 col-md-10">
+            <table class="table table-striped table-responsive table-hover datatable-overview bg-white">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col" class="text-center align-middle">Playlist Image</th>
+                        <th scope="col" class="text-center align-middle">#</th>
+                        <th scope="col" class="text-center align-middle">Name</th>
+                        <th scope="col" class="text-center">Owner</th>
+                        <th scope="col" class="text-center">Total tracks</th>
+                        <th scope="col" class="text-center">
+                            Playlist Analytics <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-info-circle" width="20" height="20" viewBox="0 0 24 24" stroke-width="2.5" stroke="#4CAF50" fill="none" stroke-linecap="round" stroke-linejoin="round"
+                                                    data-toggle="tooltip" data-placement="top" title="Loading may take a few seconds, depending on magnitude of the playlist.">
+                                <path stroke="none" d="M0 0h24v24H0z" />
+                                <circle cx="12" cy="12" r="9" />
+                                <line x1="12" y1="8" x2="12.01" y2="8" />
+                                <polyline points="11 12 12 12 12 16 13 16" />
+                            </svg>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% set counter = namespace(value=1) %}
+                    {% for item in all_playlists %}
+                    {% for playlist in item %}
+                    <tr>
+                        <td class="text-center align-middle"><img class="rounded" src="{{ playlist.images[0].url if playlist.images[0] else 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/300px-No_image_available.svg.png' }}" width="50" alt="Playlist image" /></td>
+                        <td class="text-center align-middle">{{ counter.value }}</td>
+                        <td class="text-center align-middle font-weight-bold">
+                            <a class="text-reset" href="{{ url_for("playlist_items", playlist_id=playlist.id) }}">
+                                {{ playlist.name }}
+                                <svg width="20"
+                                        height="20"
+                                        viewBox="0 0 24 24"
+                                        fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M16.4853 12.0451L12.2426 7.80249L10.8284 9.2167L13.6568 12.0451L10.8284 14.8736L12.2426 16.2878L16.4853 12.0451Z"
+                                            fill="currentColor" />
+                                    <path fill-rule="evenodd"
+                                            clip-rule="evenodd"
+                                            d="M1 4C1 2.34315 2.34315 1 4 1H20C21.6569 1 23 2.34315 23 4V20C23 21.6569 21.6569 23 20 23H4C2.34315 23 1 21.6569 1 20V4ZM4 3H20C20.5523 3 21 3.44772 21 4V20C21 20.5523 20.5523 21 20 21H4C3.44772 21 3 20.5523 3 20V4C3 3.44772 3.44772 3 4 3Z"
+                                            fill="currentColor" />
+                                </svg>
+                            </a>
+                        </td>
+                        <td class="text-center align-middle"><a class="text-reset" data-toggle="tooltip" data-placement="top" title="Open user's profile in new tab" href="{{ playlist.owner.external_urls.spotify }}" target="_blank">{{ playlist.owner.display_name }}</a></td>
+                        <td class="text-center align-middle">{{ playlist.tracks.total }}</td>
+                        <td class="text-center align-middle">
+                            <a href="{{ url_for("playlist_analytics", playlist_id=playlist.id) }}" class="btn btn-sm track-analytics-button">View <svg height="20" viewBox="0 0 21 21" width="20" xmlns="http://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd" stroke="#1db954" stroke-linecap="round" stroke-linejoin="round" transform="translate(3 3)"><path d="m.5.5v12c0 1.1045695.8954305 2 2 2h11.5" /><path d="m3.5 8.5v3" /><path d="m7.5 5.5v6" /><path d="m11.5 2.5v9" /></g></svg></a>
+                        </td>
+                    </tr>
+                    {% set counter.value = counter.value + 1 %}
+                    {% endfor %}
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% elif playlist %}
+<div class="container content-block">
+    <div class="row">
+        <div class="col-12">
+            <h1>Playlist: {{ name }}</h1>
+            <hr class="my-4" />
+        </div>
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-12">
+            <table class="table table-responsive table-hover bg-white datatable-overview">
+                <thead class="bg-dark text-white">
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col" class="text-center align-middle">Song Name</th>
+                        <th scope="col" class="text-center align-middle">Artist</th>
+                        <th scope="col" class="text-center">Explicit</th>
+                        <th scope="col" class="text-center">Duration (minutes)</th>
+                        <th scope="col" class="text-center">Track Analytics</th>
+                        <th scope="col" class="text-center">
+                            Popularity <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-info-circle" width="20" height="20" viewBox="0 0 24 24" stroke-width="1.5" stroke="#4CAF50" fill="none" stroke-linecap="round" stroke-linejoin="round"
+                                            data-toggle="tooltip" data-placement="top" title="The popularity is calculated by algorithm and is based, in the most part, on the total number of plays the track has had and how recent those plays are.">
+                                <path stroke="none" d="M0 0h24v24H0z" />
+                                <circle cx="12" cy="12" r="9" />
+                                <line x1="12" y1="8" x2="12.01" y2="8" />
+                                <polyline points="11 12 12 12 12 16 13 16" />
+                            </svg>
+                        </th>
+                        <th scope="col" class="text-center">Added at</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% set counter = namespace(value=1) %}
+                    {% for item in playlist %}
+                    {% for track in item %}
+                    <tr>
+                        <td class="align-middle">{{ counter.value }}</td>
+                        <td class="text-center align-middle">{{ track.track.name }}</td>
+                        <td class="text-center align-middle">{{ track.track.artists[0].name }}</td>
+                        <td class="text-center align-middle">
+                            {% if track.track.explicit %}
+                            Yes
+                            {% else %}
+                            No
+                            {% endif %}
+                        </td>
+                        <td class="text-center align-middle">{{ track.track.duration_ms|minutes }}</td>
+                        <td class="text-center align-middle">
+                            <a href="{{ url_for("track_analytics", track_id=track.track.id) }}" class="btn btn-sm track-analytics-button">View <svg height="20" viewBox="0 0 21 21" width="20" xmlns="http://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd" stroke="#1db954" stroke-linecap="round" stroke-linejoin="round" transform="translate(3 3)"><path d="m.5.5v12c0 1.1045695.8954305 2 2 2h11.5" /><path d="m3.5 8.5v3" /><path d="m7.5 5.5v6" /><path d="m11.5 2.5v9" /></g></svg></a>
+                        </td>
+                        <td class="text-center align-middle">{{ track.track.popularity }}</td>
+                        <td class="text-center align-middle">{{ track.added_at|datetimeformat }}</td>
+                    </tr>
+                    {% set counter.value = counter.value + 1 %}
+                    {% endfor %}
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endif %}
+{% endblock %}

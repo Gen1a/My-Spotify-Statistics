@@ -1,0 +1,20 @@
+﻿{% extends "layout.html" %}
+
+{% block title %}
+    Log In
+{% endblock %}
+
+{% block main %}
+<div class="jumbotron">
+    <div class="container">
+        <form action="auth" method="get">
+            <h2>Login</h2>
+            <p class="lead">In order to get access to the features of this application all we need is your GO-signal.
+            Your confirmation will give this application the ability to access your basic user information (username, e-mail, follower count...) 
+            and current playlists.</p>
+            <hr class="my-4" />
+            <a id="login-button" class="btn loader-button" href="/auth" role="button">Log in with Spotify</a>
+        </form>
+    </div>
+</div>
+{% endblock %}

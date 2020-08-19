@@ -1,0 +1,215 @@
+﻿{% extends "layout.html" %}
+
+{% block title %}
+Your Spotify Statistics
+{% endblock %}
+
+{% block main %}
+<div class="container content-block pb-4">
+    <div class="row">
+        <div class="col-12">
+            <h1>Your Spotify Statistics</h1>
+            <hr class="my-4" />
+        </div>
+    </div>
+    <!-- FORM -->
+    <div class="row">
+        <div class="col-12 col-md-4"  style="z-index: 2;">
+            <div class="card text-center mb-3 mr-3">
+                <img src="{{ url_for("static", filename="images/tracks.jpg") }}" class="card-img-top" alt="cassette" />
+                <div class="card-body">
+                    <h4 class="card-title">My Top Tracks</h4>
+                    <p class="card-text">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque ac tincidunt mauris, ut pulvinar justo.
+                        Phasellus tristique volutpat est, ut cursus massa pretium ac. Nam gravida leo quis magna dictum, lobortis convallis orci ornare.
+                    </p>
+                    <button type="button" class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Choose time range
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-right">
+                        <a class="dropdown-item" href="{{ url_for("user_statistics", type="tracks", time_range="short_term") }}">Short term (4 weeks)</a>
+                        <a class="dropdown-item" href="{{ url_for("user_statistics", type="tracks", time_range="medium_term") }}">Medium term (6 months)</a>
+                        <a class="dropdown-item" href="{{ url_for("user_statistics", type="tracks", time_range="long_term") }}">Long term (All time)</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-md-4" style="z-index: 1;">
+            <div class="card text-center mb-3 mr-3" >
+                <img src="{{ url_for("static", filename="images/artists.jpg") }}" class="card-img-top" alt="music artist" />
+                <div class="card-body">
+                    <h4 class="card-title">My Top Artists</h4>
+                    <p class="card-text">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque ac tincidunt mauris, ut pulvinar justo.
+                        Phasellus tristique volutpat est, ut cursus massa pretium ac. Nam gravida leo quis magna dictum, lobortis convallis orci ornare.
+                    </p>
+                    <button type="button" class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Choose time range
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-right">
+                        <a class="dropdown-item" href="{{ url_for("user_statistics", type="artists", time_range="short_term") }}">Short term (4 weeks)</a>
+                        <a class="dropdown-item" href="{{ url_for("user_statistics", type="artists", time_range="medium_term") }}">Medium term (6 months)</a>
+                        <a class="dropdown-item" href="{{ url_for("user_statistics", type="artists", time_range="long_term") }}">Long term (All time)</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-md-4">
+            <div class="card text-center mb-3 mr-3">
+                <img src="{{ url_for("static", filename="images/genres.jpg") }}" class="card-img-top" alt="vinyl records" />
+                <div class="card-body">
+                    <h4 class="card-title">My Top Genres</h4>
+                    <p class="card-text">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque ac tincidunt mauris, ut pulvinar justo.
+                        Phasellus tristique volutpat est, ut cursus massa pretium ac. Nam gravida leo quis magna dictum, lobortis convallis orci ornare.
+                    </p>
+                    <button type="button" class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Choose time range
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-right">
+                        <a class="dropdown-item" href="{{ url_for("user_statistics", type="genres", time_range="short_term") }}">Short term (4 weeks)</a>
+                        <a class="dropdown-item" href="{{ url_for("user_statistics", type="genres", time_range="medium_term") }}">Medium term (6 months)</a>
+                        <a class="dropdown-item" href="{{ url_for("user_statistics", type="genres", time_range="long_term") }}">Long term (All time)</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- TOP ARTISTS -->
+{% if top_artists %}
+<div class="container content-block">
+    <div class="row">
+        <div class="col-12">
+            <h1>Top Artists: {{ time_range|capitalize|replace("_", " ") }}</h1>
+            <hr class="my-4" />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <table class="table table-hover table-responsive datatable-overview bg-white">
+                <thead class="bg-dark text-white">
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col" class="text-center">Artist Image</th>
+                        <th scope="col" class="text-center">Name</th>
+                        <th scope="col" class="text-center">
+                            Popularity <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-info-circle" width="20" height="20" viewBox="0 0 24 24" stroke-width="1.5" stroke="#4CAF50" fill="none" stroke-linecap="round" stroke-linejoin="round"
+                                            data-toggle="tooltip" data-placement="top" title="The artist’s popularity is calculated from the popularity of all the artist’s tracks.">
+                                <path stroke="none" d="M0 0h24v24H0z" />
+                                <circle cx="12" cy="12" r="9" />
+                                <line x1="12" y1="8" x2="12.01" y2="8" />
+                                <polyline points="11 12 12 12 12 16 13 16" />
+                            </svg>
+                        </th>
+                        <th scope="col" class="text-center">Genre</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for artist in top_artists %}
+                    <tr>
+                        <td class="align-middle">{{ loop.index }}</td>
+                        <td class="text-center align-middle"><img class="rounded align-middle" src="{{ artist.images[0].url }}" width="50" alt="artist image" /></td>
+                        <td class="text-center align-middle">{{ artist.name }}</td>
+                        <td class="text-center align-middle">{{ artist.popularity }}</td>
+                        <td class="text-center align-middle">
+                            {% for genre in artist.genres %}
+                            {% if not loop.last %}
+                            {{ "%s, " % (genre) }}
+                            {% else %}
+                            {{ genre }}
+                            {% endif %}
+                            {% endfor %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endif %}
+<!-- TOP GENRES -->
+{% if top_genres %}
+<div class="container content-block">
+    <div class="row">
+        <div class="col-12">
+            <h1>Top 10 Genres: {{ time_range|capitalize|replace("_", " ") }} <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-info-circle align-top" width="20" height="20" viewBox="0 0 24 24" stroke-width="2.5" stroke="#414141" fill="none" stroke-linecap="round" stroke-linejoin="round"
+                                                                                  data-toggle="tooltip" data-placement="top" title="Based on your Top Artists">
+                    <path stroke="none" d="M0 0h24v24H0z" />
+                    <circle cx="12" cy="12" r="9" />
+                    <line x1="12" y1="8" x2="12.01" y2="8" />
+                    <polyline points="11 12 12 12 12 16 13 16" />
+                </svg>
+            </h1>
+            <hr class="my-4" />
+        </div>
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-12 col-md-6">
+            <table class="table table-sm table-hover bg-white">
+                <thead class="bg-dark text-white">
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col" class="text-center">Genre</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for i in range(10) %}
+                    <tr>
+                        <td class="align-middle">{{ loop.index }}</td>
+                        <td class="align-middle text-center">{{ top_genres[i][0]|capitalize }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endif %}
+<!-- TOP TRACKS -->
+{% if top_tracks %}
+<div class="container content-block">
+    <div class="row">
+        <div class="col-12">
+            <h1>Top Tracks: {{ time_range|capitalize|replace("_", " ") }}</h1>
+            <hr class="my-4" />
+        </div>
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-12 col-md-8">
+            <table class="table table-hover table-responsive datatable-overview bg-white">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col" class="text-center">Album Image</th>
+                        <th scope="col" class="text-center">Song name</th>
+                        <th scope="col" class="text-center">Artist</th>
+                        <th scope="col" class="text-center">
+                            Popularity <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-info-circle" width="20" height="20" viewBox="0 0 24 24" stroke-width="1.5" stroke="#4CAF50" fill="none" stroke-linecap="round" stroke-linejoin="round"
+                                            data-toggle="tooltip" data-placement="top" title="The popularity is calculated by algorithm and is based, in the most part, on the total number of plays the track has had and how recent those plays are.">
+                                <path stroke="none" d="M0 0h24v24H0z" />
+                                <circle cx="12" cy="12" r="9" />
+                                <line x1="12" y1="8" x2="12.01" y2="8" />
+                                <polyline points="11 12 12 12 12 16 13 16" />
+                            </svg>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for track in top_tracks %}
+                    <tr>
+                        <td class="align-middle">{{ loop.index }}</td>
+                        <td class="text-center align-middle"><img class="rounded align-middle" src="{{ track.album.images[0].url }}" width="50" alt="album image" /></td>
+                        <td class="text-center align-middle">{{ track.name }}</td>
+                        <td class="text-center align-middle">{{ track.artists[0].name }}</td>
+                        <td class="text-center align-middle">{{ track.popularity }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endif %}
+{% endblock %}

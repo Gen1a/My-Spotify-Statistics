@@ -1,0 +1,136 @@
+﻿{% extends "layout.html" %}
+
+{% block title %}
+    Party Planner
+{% endblock %}
+
+{% block main %}
+<div class="container content-block">
+    <div class="row">
+        <div class="col-12">
+            <h1 class="subtitle">Party Planner</h1>
+            <hr class="my-4" />
+        </div>
+    </div>
+    <!-- USAGE CONTAINER -->
+    <div class="row">
+        <div class="col-12">
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">Cras justo odio</li>
+                <li class="list-group-item">Dapibus ac facilisis in</li>
+                <li class="list-group-item">Morbi leo risus</li>
+                <li class="list-group-item">Porta ac consectetur ac</li>
+                <li class="list-group-item">Vestibulum at eros</li>
+            </ul>
+        </div>
+    </div>
+    <!-- SEARCH CONTAINER -->
+    <div class="row">
+        <div class="col-12">
+            <form>
+                <div class="form-row">
+                    <div class="col-12">
+                        <input type="text" class="form-control w-100" id="artist-name" placeholder="Enter an artist name">
+                        <button type="button" class="btn btn-sm mt-2 w-100" id="artist-search">Search</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- MODAL CONTAINER -->
+<div class="modal fade" id="partyplanner-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modal-title"></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" id="modal-body">
+                
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-sm" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ALERT CONTAINER -->
+<div class="container my-2">
+    <div class="alert alert-danger alert-dismissible" role="alert">
+        <div id="alert-message"></div>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+</div>
+<!-- SELECTED ARTISTS CONTAINER -->
+<div class="container-fluid content-block hidden" id="selected-artists-grid">
+    <h5>Your selected artists:</h5>
+    <hr class="my-3" />
+    <div class="row row-cols-2 row-cols-md-5 artist-cards" id="artist-selection">
+
+    </div>
+    <button type="button" class="btn btn-sm mt-2 w-100" id="generate-playlist">Generate Party Playlist</button>
+</div>
+<!-- SEARCH RESULTS CONTAINER -->
+<div class="container-fluid content-block hidden pb-4 pr-1" id="search-results-grid">
+    <h5 id="search-results-info"></h5>
+    <hr class="my-3" />
+    <div class="row row-cols-2 row-cols-md-5 artist-cards" id="imagerow">
+
+    </div>
+</div>
+<!-- PLAYLIST CREATION CONTAINER -->
+<div class="container content-block hidden pb-4" id="partyplanner-overview">
+    <div class="row">
+        <div class="col-12">
+            <h4>Your Party Playlist</h4>
+            <hr class="my-3" />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 text-center">
+            <button type="button" class="btn mb-3 mx-auto w-50" id="create-playlist">Create Playlist in Spotify</button>
+        </div>
+    </div>
+    <div class="row d-flex justify-content-center">
+        <div class="col-12 col-md-8">
+            <input type="text" class="form-control mb-2" id="playlist-name" placeholder="Enter a name for your playlist">
+            <input type="text" class="form-control mb-3" id="playlist-description" placeholder="Enter a description (optional)">
+        </div>
+    </div>
+    <div class="row d-flex justify-content-center">
+        <div class="col-12 col-md-8" id="partyplanner-info">
+
+        </div>
+    </div>
+    <div class="row d-flex justify-content-center" id="partyplanner-playlist">
+        <div class="col-12 col-md-10">
+            <table class="table table-responsive table-striped mt-3">
+                <thead class="bg-dark text-white">
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col" class="text-center align-middle">Song Name</th>
+                        <th scope="col" class="text-center align-middle">Artist</th>
+                        <th scope="col" class="text-center">Duration (minutes)</th>
+                        <th scope="col" class="text-center">
+                            Popularity <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-info-circle" width="20" height="20" viewBox="0 0 24 24" stroke-width="1.5" stroke="#4CAF50" fill="none" stroke-linecap="round" stroke-linejoin="round"
+                                            data-toggle="tooltip" data-placement="top" title="The popularity is calculated by algorithm and is based, in the most part, on the total number of plays the track has had and how recent those plays are.">
+                                <path stroke="none" d="M0 0h24v24H0z" />
+                                <circle cx="12" cy="12" r="9" />
+                                <line x1="12" y1="8" x2="12.01" y2="8" />
+                                <polyline points="11 12 12 12 12 16 13 16" />
+                            </svg>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody id="partyplanner-table-body">
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+    {% endblock %}

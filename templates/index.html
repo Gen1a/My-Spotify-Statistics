@@ -1,0 +1,99 @@
+﻿{% extends "layout.html" %}
+
+{% block title %}
+Homepage
+{% endblock %}
+
+{% block main %}
+<div class="jumbotron">
+    <div class="row">
+        <div class="col-12 col-md-10">
+            <h1 class="display-4">Hi there, stranger!</h1>
+            <p class="lead">
+                This webapplication has been developed by a young and ambitious student Applied Informatics
+                from Ghent. Although some of this application's features are also provided by Spotify's application,
+                you can find some interesting and even handy features about your very own 'Spotify Footprint' below!
+            </p>
+            <hr class="my-4" />
+            <p class="lead"><em><small>Want to give it a go?</small></em></p>
+            <p>
+                <a class="btn" href="/login">Get started</a>
+            </p>
+        </div>
+    </div>
+</div>
+<div class="container content-block">
+    <div class="row">
+        <div class="col-12">
+            <h1>Features</h1>
+            <hr class="my-4" />
+        </div>
+    </div>
+    <!-- FIRST ROW -->
+    <div class="row">
+        <div class="col-lg-4">
+            <div class="card card-index mb-3 mr-3">
+                <img src="{{ url_for("static", filename="images/playlist.jpg") }}" class="card-img-top" alt="playlist" />
+                <h4 class="card-title">Playlist Overview</h4>
+                <p class="card-text">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque ac tincidunt mauris, ut pulvinar justo.
+                    Phasellus tristique volutpat est, ut cursus massa pretium ac. Nam gravida leo quis magna dictum, lobortis convallis orci ornare.
+                </p>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="card card-index mb-3 mr-3">
+                <img src="{{ url_for("static", filename="images/binoculars.jpg") }}" class="card-img-top" alt="binoculars" />
+                <h4 class="card-title">Search Spotify Database</h4>
+                <p class="card-text">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque ac tincidunt mauris, ut pulvinar justo.
+                    Phasellus tristique volutpat est, ut cursus massa pretium ac. Nam gravida leo quis magna dictum, lobortis convallis orci ornare.
+                </p>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="card card-index mb-3 mr-3">
+                <img src="{{ url_for("static", filename="images/analytics2.jpg") }}" class="card-img-top" alt="analytics" />
+                <h4 class="card-title">Analytics</h4>
+                <p class="card-text">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque ac tincidunt mauris, ut pulvinar justo.
+                    Phasellus tristique volutpat est, ut cursus massa pretium ac. Nam gravida leo quis magna dictum, lobortis convallis orci ornare.
+                </p>
+            </div>
+        </div>
+    </div>
+    <!-- SECOND ROW -->
+    <div class="row">
+        <div class="col-lg-4">
+            <div class="card card-index mb-3 mr-3">
+                <img src="{{ url_for("static", filename="images/party.jpg") }}" class="card-img-top" alt="party" />
+                <h4 class="card-title">Party Planner</h4>
+                <p class="card-text">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque ac tincidunt mauris, ut pulvinar justo.
+                    Phasellus tristique volutpat est, ut cursus massa pretium ac. Nam gravida leo quis magna dictum, lobortis convallis orci ornare.
+                </p>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="card card-index mb-3 mr-3">
+                <img src="{{ url_for("static", filename="images/running2.png") }}" class="card-img-top" alt="running" />
+                <h4 class="card-title">Running Planner</h4>
+                <p class="card-text">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque ac tincidunt mauris, ut pulvinar justo.
+                    Phasellus tristique volutpat est, ut cursus massa pretium ac. Nam gravida leo quis magna dictum, lobortis convallis orci ornare.
+                </p>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="card card-index mb-3 mr-3">
+                <img src="{{ url_for("static", filename="images/lightbulb.jpg") }}" class="card-img-top" alt="lightbulb" />
+                <h4 class="card-title">Your own feature?</h4>
+                <p class="card-text">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque ac tincidunt mauris, ut pulvinar justo.
+                    Phasellus tristique volutpat est, ut cursus massa pretium ac. Nam gravida leo quis magna dictum, lobortis convallis orci ornare.
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
