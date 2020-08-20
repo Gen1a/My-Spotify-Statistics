@@ -8,7 +8,7 @@ Playlist Analytics
 <div class="container content-block pb-3">
     <div class="row">
         <div class="col-12">
-            <h1 class="subtitle">Playlist Analytics</h1>
+            <h1><i class="gg-insights"></i>Playlist Analytics</h1>
             <hr class="my-4" />
         </div>
     </div>
@@ -32,7 +32,7 @@ Playlist Analytics
 <div class="container-fluid content-block pb-3">
     <div class="row">
         <div class="col-12">
-            <h4 class="subtitle">Average Audio Features for "{{ playlist_name }}"</h4>
+            <h4 class="subtitle"><i class="gg-play-button-o"></i>Average Audio Features for "{{ playlist_name }}"</h4>
             <hr class="my-4" />
         </div>
     </div>
@@ -41,7 +41,7 @@ Playlist Analytics
             <div class="small-content-block text-center"><img src="data:image/png;base64,{{ playlist_features }}" class="img-fluid features" alt="playlist features" /></div>
         </div>
         <div class="col-12 col-md-4 mt-2 mx-auto">
-            <div class="list-group" id="list-tab" role="tablist">
+            <div class="list-group list-group-analytics" id="list-tab" role="tablist">
                 {% for key, value in playlist_features_data.items() %}
                 <a class="list-group-item list-group-item-action border-light {% if loop.first %} active {% endif %}" id="list-{{ key }}-list" data-toggle="list" href="#list-{{ key }}" role="tab" aria-controls="{{ key }}">
                     {{ key|capitalize }} <p class="badge badge-pill float-right">{{ "%.3f"|format(value) }}</p>

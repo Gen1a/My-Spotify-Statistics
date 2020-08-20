@@ -4,20 +4,32 @@ $(document).ready(function () {
     $('[data-toggle="tooltip"]').tooltip();
     // Hide alerts
     $('.alert').hide();
+    // Show modal + ask confirmation when trying to log out
+    $('#navbar-logout').on("click", function (e) {
+        $('#modal').modal('show');
+        $('#modal-title').text("Log Out");
+        $('#modal-body').text("Are you sure you want to log out?");
+        // Add confirm button to modal footer and change cancel button text
+        $('#modal-cancel').text("No");
+        $('#modal-confirm').removeClass("hidden");
+    })
     // Makes bootstrap table rows clickable
     //$(".clickable-row").on("click", function (e, row, $element) {
     //    window.location = $(this).data('href');
     //});
     // Adds DataTables features to webpage
     $('.datatable-overview').DataTable();
-    // Adds loading spinners to analytics buttons
+    // Adds loading spinners to login and analytics buttons
     $('.track-analytics-button').on("click", function () {
         $(this).closest('td').html('<div class="spinner-border text-success disabled" role="status"><span class="sr-only"></span></div>');
-        $('#partyplanner-modal').modal('show');
-        $('#modal-title').text("Playlist Analytics");
-        $('#modal-body').text("Loading may take a few seconds, depending on magnitude of the playlist.");
     });
     $('.loader-button').on("click", function () {
+        $(this).html('<div class="spinner-border text-success disabled" role="status"><span class="sr-only"></span></div>');
+        $('#modal').modal('show');
+        $('#modal-title').text("Playlist Analytics");
+        $('#modal-body').text("Loading may take up to a minute, depending on magnitude of the playlist.");
+    });
+    $('#login-button').on("click", function () {
         $(this).html('<div class="spinner-border text-success disabled" role="status"><span class="sr-only"></span></div>');
     });
     // Change href of anchor element depending on selected playlist
@@ -97,7 +109,8 @@ $(document).ready(function () {
                     card.append(card_body.append(card_title));
                     // Add click event to cards
                     card.on("click", function () {
-                        $("#selected-artists-grid").removeClass("hidden");
+                        $("#generate-playlist").removeClass("hidden");
+                        $('#selected-placeholder').remove();
                         var card_copy = card.clone();
                         var artist_id = card_copy[0].dataset.artistId;
                         var col = $("<div>").addClass("col");
@@ -116,6 +129,11 @@ $(document).ready(function () {
                             // Add remove event to card
                             col.on("click", function () {
                                 this.remove();
+                                // Check whether an artist remains
+                                let selection_element = $('#artist-selection').find(".card");
+                                if (selection_element.length == 0) {
+                                    $('#generate-playlist').addClass("hidden");
+                                }
                                 // Show alert message
                                 $('.alert').alert();
                                 $('#alert-message').text("Artist removed");
@@ -127,14 +145,8 @@ $(document).ready(function () {
                         }
                         // Artist already selected
                         else {
-                            // Show alert message
-                            //$('.alert').alert();
-                            //$('#alert-message').text("Artist already added.");
-                            //$(".alert").fadeTo(2000, 500).slideUp(500, function () {
-                            //    $(".alert").slideUp(500);
-                            //});
                             // Show modal message
-                            $('#partyplanner-modal').modal('show');
+                            $('#modal').modal('show');
                             $('#modal-title').text("Sorry");
                             $('#modal-body').text("This artist is already added. Give other artists some love as well!");
                         }
@@ -152,7 +164,7 @@ $(document).ready(function () {
     $('#generate-playlist').on("click", function () {
         // Add loading spinner to button and reset back to normal
         var old_html = $('#generate-playlist').html();
-        $('#generate-playlist').html('<div class="spinner-border text-success disabled" role="status"><span class= "sr-only"></span></div>');
+        $('#generate-playlist').html('<div class="spinner-border text-success disabled" role="status"><span class= "sr-only">Loading...</span></div>');
         setTimeout(function () { $('#generate-playlist').html(old_html); }, 7000);
         // Collect selected artist ids
         let selection_element = $('#artist-selection').find(".card");
@@ -177,15 +189,14 @@ $(document).ready(function () {
             success: function (response) {
                 // Hide selected artists and search results grid
                 $('#search-results-grid').addClass("hidden");
-                $('#selected-artists-grid').addClass("hidden");
                 // Show created playlist overview
                 $('#partyplanner-overview').removeClass("hidden");
                 // Show modal with information
-                $('#partyplanner-modal').modal('show');
+                $('#modal').modal('show');
                 $('#modal-title').text("Playlist generated");
                 $('#modal-body').text("Great! You can now check out your unique playlist's audio features and playlist content.");
                 // Calculate amount of columns
-                columns = $('#partyplanner-playlist').find("th").length;              
+                columns = $('#playlist-tab-content').find("th").length;              
                 // Playlist info
                 var trackCounter = 1;
                 let playlistDuration = 0;
@@ -251,11 +262,13 @@ $(document).ready(function () {
                     else
                         return Math.floor(duration) + " minutes";
                 }
-                var infoElement = '<ul class="list-group mb-3">' + 
+                var infoElement = '<div class="row align-items-center"><div class="col-12 col-md-6">' +
+                    '<div class="small-content-block text-center"><img src="data:image/png;base64,' + response.url + '" class="img-fluid features" alt="playlist features" /></div></div>' +
+                    '<div class="col-12 col-md-6">' +
+                    '<ul class="list-group list-group-analytics my-2">' + 
                     '<li class="list-group-item">Amount of tracks: <span class="badge badge-pill float-right">' + (trackCounter - 1) + '</span></li>' +
                     '<li class="list-group-item">Playlist Duration: <span class="badge badge-pill float-right">' + formatDuration(playlistDuration) + '</span></li>' +
-                    '<li class="list-group-item">Top Genres: <span class="badge badge-pill float-right">' + response.top_genres[0][0] + (typeof(response.top_genres[1]) === "undefined" ? "" : " & ") + (typeof(response.top_genres[1]) === "undefined" ? "" : response.top_genres[1][0])  + '</span></li></ul>' + 
-                    '<div class="small-content-block text-center"><img src="data:image/png;base64,' + response.url + '" class="img-fluid features" alt="playlist features" /></div>';
+                    '<li class="list-group-item">Top Genres: <span class="badge badge-pill float-right">' + response.top_genres[0][0] + (typeof(response.top_genres[1]) === "undefined" ? "" : " & ") + (typeof(response.top_genres[1]) === "undefined" ? "" : response.top_genres[1][0])  + '</span></li></ul></div>';
                 $('#partyplanner-info').append(infoElement);
             },
             error: function () {
@@ -278,7 +291,7 @@ $(document).ready(function () {
         }
         var playlistDescription = $('#playlist-description').val();
         // Get all track uris and store in array
-        var track_uris_elements = $('#partyplanner-playlist').find('[data-track-uri]');
+        var track_uris_elements = $('#playlist-tab-content').find('[data-track-uri]');
         var track_uris = []
         for (i = 0; i < track_uris_elements.length; i++) {
             track_uris.push(track_uris_elements[i].dataset.trackUri)
@@ -295,13 +308,14 @@ $(document).ready(function () {
                 "description": playlistDescription
             }),
             success: function (response) {
-                $('#partyplanner-modal').modal('show');
+                $('#modal').modal('show');
                 $('#modal-title').text("Playlist created");
-                $('#modal-body').text("Check out your Spotify account to find your new Party Playlist!");
-
+                var modal_body_content = "<p>Check out your Spotify account or click the link below to find your new Party Playlist and share it with friends!</p>";
+                modal_body_content += '<a class="btn btn-sm" id="playlist-url" href="' + response + '" target="_blank"><i class="gg-share"></i>Link to playlist</a>';
+                $('#modal-body').html(modal_body_content);
             },
             error: function () {
-                $('#partyplanner-modal').modal('show');
+                $('#modal').modal('show');
                 $('#modal-title').text("Sorry");
                 $('#modal-body').text("Hmm, something went wrong :( Please contact the site owner to report the bug.");
             }

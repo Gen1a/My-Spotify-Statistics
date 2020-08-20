@@ -8,20 +8,40 @@
 <div class="container content-block">
     <div class="row">
         <div class="col-12">
-            <h1 class="subtitle">Party Planner</h1>
+            <h1><i class="gg-disc"></i>Party Planner <span class="btn btn-sm" data-toggle="collapse" href="#partyplanner-usage" role="button" aria-expanded="false" aria-controls="collapseExample">
+    How to Use?</span></h1>       
             <hr class="my-4" />
         </div>
     </div>
     <!-- USAGE CONTAINER -->
-    <div class="row">
-        <div class="col-12">
-            <ul class="list-group list-group-flush">
-                <li class="list-group-item">Cras justo odio</li>
-                <li class="list-group-item">Dapibus ac facilisis in</li>
-                <li class="list-group-item">Morbi leo risus</li>
-                <li class="list-group-item">Porta ac consectetur ac</li>
-                <li class="list-group-item">Vestibulum at eros</li>
-            </ul>
+    <div class="row d-flex justify-content-center">
+        <div class="col-12">   
+            <div class="collapse" id="partyplanner-usage">
+                <ol>
+                    <li>Collect your own or your party guests's favorite artists</li>
+                    <li>
+                        Add the artists to 'Your Selected Artists' by:
+                        <ol>
+                            <li>entering the artist's name and clicking the 'Search' button</li>
+                            <li>looking for the right artist in the search results</li>
+                            <li>clicking on the artist to add him/her to your list</li>
+                        </ol>
+                    </li>
+                    <li>
+                        Repeat Step 2 until you've added all the required artists
+                        <ol>
+                            <li>Clicked on the wrong artist? Simply click on an artist in the 'Your Selected Artists' field to remove him/her from the selection.</li>
+                        </ol>
+                    </li>
+                    <li>
+                        Click the 'Generate Party Playlist' button to generate your unique party playlist. This will give you an overview of the playlist's content and it's audio features.
+                    </li>
+                    <li>
+                        If you're satisfied with the playlist, simply enter a name and description (optional) for your playlist and click the 'Create Playlist in Spotify' button. This will automatically add your unique playlist to your Spotify account.
+                    </li>
+                    <li>Enjoy the party to the fullest ;) &#x1F389</li>
+                </ol>
+            </div>
         </div>
     </div>
     <!-- SEARCH CONTAINER -->
@@ -29,31 +49,10 @@
         <div class="col-12">
             <form>
                 <div class="form-row">
-                    <div class="col-12">
                         <input type="text" class="form-control w-100" id="artist-name" placeholder="Enter an artist name">
                         <button type="button" class="btn btn-sm mt-2 w-100" id="artist-search">Search</button>
-                    </div>
                 </div>
             </form>
-        </div>
-    </div>
-</div>
-<!-- MODAL CONTAINER -->
-<div class="modal fade" id="partyplanner-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="modal-title"></h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body" id="modal-body">
-                
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-sm" data-dismiss="modal">Close</button>
-            </div>
         </div>
     </div>
 </div>
@@ -67,13 +66,17 @@
     </div>
 </div>
 <!-- SELECTED ARTISTS CONTAINER -->
-<div class="container-fluid content-block hidden" id="selected-artists-grid">
-    <h5>Your selected artists:</h5>
-    <hr class="my-3" />
-    <div class="row row-cols-2 row-cols-md-5 artist-cards" id="artist-selection">
-
+<div class="container content-block" id="selected-artists-grid">
+    <div class="row">
+        <div class="col-12">
+            <h5><i class="gg-vinyl"></i>Your Selected Artists:</h5>
+            <hr class="my-3" />
+            <div class="row row-cols-2 row-cols-md-5 artist-cards" id="artist-selection">
+                <div class="col" id="selected-placeholder">None</div>
+            </div>
+            <button type="button" class="btn btn-sm mt-2 w-100 hidden" id="generate-playlist">Generate Party Playlist</button>
+        </div>
     </div>
-    <button type="button" class="btn btn-sm mt-2 w-100" id="generate-playlist">Generate Party Playlist</button>
 </div>
 <!-- SEARCH RESULTS CONTAINER -->
 <div class="container-fluid content-block hidden pb-4 pr-1" id="search-results-grid">
@@ -83,17 +86,17 @@
 
     </div>
 </div>
-<!-- PLAYLIST CREATION CONTAINER -->
+<!-- PLAYLIST GENERATION CONTAINER -->
 <div class="container content-block hidden pb-4" id="partyplanner-overview">
     <div class="row">
         <div class="col-12">
-            <h4>Your Party Playlist</h4>
+            <h4><i class="gg-play-list"></i>Your Party Playlist</h4>
             <hr class="my-3" />
         </div>
     </div>
-    <div class="row">
-        <div class="col-12 text-center">
-            <button type="button" class="btn mb-3 mx-auto w-50" id="create-playlist">Create Playlist in Spotify</button>
+    <div class="row d-flex justify-content-center">
+        <div class="col-12 col-md-8 text-center">
+            <button type="button" class="btn mb-3" id="create-playlist">Create Playlist in Spotify</button>
         </div>
     </div>
     <div class="row d-flex justify-content-center">
@@ -102,35 +105,52 @@
             <input type="text" class="form-control mb-3" id="playlist-description" placeholder="Enter a description (optional)">
         </div>
     </div>
+    <!-- PLAYLIST CREATION CONTAINER -->
     <div class="row d-flex justify-content-center">
-        <div class="col-12 col-md-8" id="partyplanner-info">
-
+        <div class="col-12">
+            <ul class="nav nav-tabs justify-content-around" role="tablist">
+                <li class="nav-item w-50" role="presentation">
+                    <a class="nav-link active" id="playlist-tab" data-toggle="tab" href="#playlist-tab-content" role="tab" aria-controls="playlist-tab-content" aria-selected="true"><i class="gg-layout-list"></i>Playlist</a>
+                </li>
+                <li class="nav-item w-50" role="presentation">
+                    <a class="nav-link" id="features-tab" data-toggle="tab" href="#features-tab-content" role="tab" aria-controls="features-tab-content" aria-selected="false"><i class="gg-play-button-o"></i>Audio Features</a>
+                </li>
+            </ul>
         </div>
     </div>
-    <div class="row d-flex justify-content-center" id="partyplanner-playlist">
-        <div class="col-12 col-md-10">
-            <table class="table table-responsive table-striped mt-3">
-                <thead class="bg-dark text-white">
-                    <tr>
-                        <th scope="col">#</th>
-                        <th scope="col" class="text-center align-middle">Song Name</th>
-                        <th scope="col" class="text-center align-middle">Artist</th>
-                        <th scope="col" class="text-center">Duration (minutes)</th>
-                        <th scope="col" class="text-center">
-                            Popularity <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-info-circle" width="20" height="20" viewBox="0 0 24 24" stroke-width="1.5" stroke="#4CAF50" fill="none" stroke-linecap="round" stroke-linejoin="round"
-                                            data-toggle="tooltip" data-placement="top" title="The popularity is calculated by algorithm and is based, in the most part, on the total number of plays the track has had and how recent those plays are.">
-                                <path stroke="none" d="M0 0h24v24H0z" />
-                                <circle cx="12" cy="12" r="9" />
-                                <line x1="12" y1="8" x2="12.01" y2="8" />
-                                <polyline points="11 12 12 12 12 16 13 16" />
-                            </svg>
-                        </th>
-                    </tr>
-                </thead>
-                <tbody id="partyplanner-table-body">
-                </tbody>
-            </table>
+    <div class="row d-flex justify-content-center">
+        <div class="col-12">
+            <div class="tab-content">
+                <div class="tab-pane fade show active mt-1" id="playlist-tab-content" role="tabpanel" aria-labelledby="playlist-tab">
+                    <table class="table table-responsive table-striped">
+                        <thead class="bg-dark text-white">
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col" class="text-center align-middle">Song Name</th>
+                                <th scope="col" class="text-center align-middle">Artist</th>
+                                <th scope="col" class="text-center">Duration (minutes)</th>
+                                <th scope="col" class="text-center">
+                                    Popularity <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-info-circle" width="20" height="20" viewBox="0 0 24 24" stroke-width="1.5" stroke="#4CAF50" fill="none" stroke-linecap="round" stroke-linejoin="round"
+                                                    data-toggle="tooltip" data-placement="top" title="The popularity is calculated by algorithm and is based, in the most part, on the total number of plays the track has had and how recent those plays are.">
+                                        <path stroke="none" d="M0 0h24v24H0z" />
+                                        <circle cx="12" cy="12" r="9" />
+                                        <line x1="12" y1="8" x2="12.01" y2="8" />
+                                        <polyline points="11 12 12 12 12 16 13 16" />
+                                    </svg>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody id="partyplanner-table-body">
+                        </tbody>
+                    </table>
+                </div>
+                <div class="tab-pane fade mt-1" id="features-tab-content" role="tabpanel" aria-labelledby="features-tab">
+                    <div id="partyplanner-info">
+
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
-    {% endblock %}
+{% endblock %}

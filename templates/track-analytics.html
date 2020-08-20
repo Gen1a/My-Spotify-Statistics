@@ -8,14 +8,14 @@ Track Analytics
 <div class="container content-block">
     <div class="row">
         <div class="col-12">
-            <h1>Track Analytics</h1>
+            <h1><i class="gg-insights"></i>Track Analytics</h1>
             <hr class="my-4" />
         </div>
     </div>
     <!-- FORM -->
     <div class="row">
         <div class="col-12">
-            <form action="/track-analytics" method="POST">
+            <form action="{{ url_for("search_track_analytics") }}" method="POST">
                 <div class="form-group text-center">
                     <input type="text" class="form-control w-100" name="search-query" id="search-query" placeholder="Enter a track or artist..."/>
                     <button type="submit" class="btn btn-sm mt-2 w-100">Find Tracks</button>
@@ -65,7 +65,7 @@ Track Analytics
     <div class="row">
         <!-- INFO LABEL -->
         <div class="col-12">
-            <h4>Track Features</h4>
+            <h4><i class="gg-play-button-o"></i>Track Features</h4>
             <hr class="my-4" />
         </div>
     </div>

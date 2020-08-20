@@ -47,9 +47,11 @@ CLIENT = json.load(open('conf.json', 'r+'))
 CLIENT_ID = CLIENT['id']
 CLIENT_SECRET = CLIENT['secret']
 
+
 # ------------- Spotify Base URLS -------------
 SPOTIFY_AUTH_URL = "https://accounts.spotify.com/authorize"
 SPOTIFY_TOKEN_URL = "https://accounts.spotify.com/api/token"
+
 
 # ------------- Server-side Parameters -------------
 CLIENT_SIDE_URL = "http://127.0.0.1"
@@ -59,6 +61,7 @@ SCOPE = "user-follow-read user-library-read user-read-email user-read-private us
 STATE = ""
 SHOW_DIALOG_bool = True
 SHOW_DIALOG_str = str(SHOW_DIALOG_bool).lower()
+
 
 # ------------- Dict of query parameters -------------
 auth_query_parameters = {
@@ -385,6 +388,7 @@ def partyplanner():
 
 
 @app.route("/request", methods=["GET", "POST"])
+@helpers.login_required
 def request_data():
     if request.method == "GET":
         query_type = request.args.get("type")
@@ -433,9 +437,6 @@ def request_data():
             playlist_description =  'Party Playlist created by My Spotify Statistics.'
         # Get track uris from payload and convert from JSON string to list
         track_uris = json.loads(payload['uris'])
-        
-        # Create JSON request body
-        ########track_uris_body = { 'uris' : track_uris[slicer] }
         # Create the Spotify playlist
         user_profile_data = helpers.get_my_profile(session["authorization_header"])
         user_id = user_profile_data["id"]
@@ -445,6 +446,9 @@ def request_data():
                                                       playlist_description)
         # Get new playlist api endpoint from new playlist object
         new_playlist_href = new_playlist_object["tracks"]["href"]
+        # Get new playlist external url
+        new_playlist_url = new_playlist_object["external_urls"]["spotify"]
+        print(new_playlist_url)
         # Slice amount of tracks (Spotify API accepts max 100 tracks / request)
         tracks_amount = len(track_uris)
         slicer = slice(0, 100)
@@ -456,7 +460,7 @@ def request_data():
                                           headers=session["authorization_header"],
                                           data=json.dumps(track_uris_body))
 
-        return playlist_snapshot.text
+        return jsonify(new_playlist_url)
 
 
 #@app.route("/test")

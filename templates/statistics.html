@@ -8,11 +8,11 @@ Your Spotify Statistics
 <div class="container content-block pb-4">
     <div class="row">
         <div class="col-12">
-            <h1>Your Spotify Statistics</h1>
+            <h1><i class="gg-chart"></i>Your Spotify Statistics</h1>
             <hr class="my-4" />
         </div>
     </div>
-    <!-- FORM -->
+    <!-- STATISTICS CARDS -->
     <div class="row">
         <div class="col-12 col-md-4"  style="z-index: 2;">
             <div class="card text-center mb-3 mr-3">
@@ -81,7 +81,7 @@ Your Spotify Statistics
 <div class="container content-block">
     <div class="row">
         <div class="col-12">
-            <h1>Top Artists: {{ time_range|capitalize|replace("_", " ") }}</h1>
+            <h1><i class="gg-music-note"></i>Top Artists: {{ time_range|capitalize|replace("_", " ") }}</h1>
             <hr class="my-4" />
         </div>
     </div>
@@ -134,7 +134,7 @@ Your Spotify Statistics
 <div class="container content-block">
     <div class="row">
         <div class="col-12">
-            <h1>Top 10 Genres: {{ time_range|capitalize|replace("_", " ") }} <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-info-circle align-top" width="20" height="20" viewBox="0 0 24 24" stroke-width="2.5" stroke="#414141" fill="none" stroke-linecap="round" stroke-linejoin="round"
+            <h1><i class="gg-music-note"></i>Top 10 Genres: {{ time_range|capitalize|replace("_", " ") }} <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-info-circle align-top" width="20" height="20" viewBox="0 0 24 24" stroke-width="2.5" stroke="#414141" fill="none" stroke-linecap="round" stroke-linejoin="round"
                                                                                   data-toggle="tooltip" data-placement="top" title="Based on your Top Artists">
                     <path stroke="none" d="M0 0h24v24H0z" />
                     <circle cx="12" cy="12" r="9" />
@@ -172,7 +172,7 @@ Your Spotify Statistics
 <div class="container content-block">
     <div class="row">
         <div class="col-12">
-            <h1>Top Tracks: {{ time_range|capitalize|replace("_", " ") }}</h1>
+            <h1><i class="gg-music-note"></i>Top Tracks: {{ time_range|capitalize|replace("_", " ") }}</h1>
             <hr class="my-4" />
         </div>
     </div>

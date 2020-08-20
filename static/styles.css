@@ -12,18 +12,80 @@ body {
 main {
     color: #414141;
 }
+footer {
+    margin-bottom: 0px;
+}
+/* UNORDERED LIST */
+ol {
+    list-style: none;
+    counter-reset: steps;
+}
+ol li {
+    counter-increment: steps;
+}
+ol li::before {
+    content: counter(steps);
+    margin-right: 0.5rem;
+    background: #1db954;
+    color: white;
+    width: 1.2em;
+    height: 1.2em;
+    border-radius: 50%;
+    display: inline-grid;
+    place-items: center;
+    line-height: 1.2em;
+}
+ol ol li::before {
+    background: black;
+}
+/* NAVBAR */
+.navbar {
+    background-color: #1db954;
+    color: #000;
+}
 nav .navbar-brand {
-    font-weight: 700;
+    font-weight: 600;
     font-size: x-large;
 }
 .navbar-nav {
     font-weight: 700;
+    color: #000;
+}
+/* Set cursor of logout without href to pointer */
+#navbar-logout{
+    cursor: pointer;
+}
+.gg-eye {
+    display: inline-block;
+    margin-left: 4px;
+    margin-bottom: -2px;
 }
 .gg-loadbar-sound {
-    display: block;
+    display: inline-block;
     height: 26px;
     width: 2px;
     margin-right: 12px;
+}
+.gg-insights, .gg-list, .gg-profile {
+    display: inline-block;
+    margin-right: 12px;
+    margin-bottom: 3px;
+}
+.gg-music-note, .gg-chart, .gg-play-button-o, .gg-disc, .gg-play-list, .gg-layout-list, .gg-share, .gg-vinyl{
+    display: inline-block;
+    margin-right: 18px;
+    margin-bottom: 5px;
+}
+.gg-chart{
+    display: inline-block;
+    margin-right: 14px;
+    margin-bottom: 11px;
+
+}
+.gg-play-button-o {
+    display: inline-block;
+    margin-right: 10px;
+    margin-bottom: -4px;
 }
 .jumbotron {
     background-color: rgba(255,255,255,0.6);
@@ -46,9 +108,6 @@ nav .navbar-brand {
 .dropdown-item:hover {
     box-shadow: inset 2px 2px 5px #73be7f, inset -3px -3px 6px #d4d4d4;
     background: #2ef173;
-}
-footer{
-    margin-bottom: 0px;
 }
 .btn {
     border-radius: 8px;
@@ -93,7 +152,6 @@ footer{
     overflow: hidden;
     position: relative;
     margin: 10px auto;
-/*    border: 1px solid black;*/
     border-radius: 10px;
     cursor: pointer;
 }
@@ -168,10 +226,6 @@ footer{
 table.dataTable tbody th, table.dataTable tbody td {
     padding: 4px 10px;
 }
-/* Changes mouse cursor to hand/pointer in datatable */
-.clickable-row td {
-    cursor: pointer;
-}
 #badge {
     font-weight: 300;
     color: #fff;
@@ -193,6 +247,7 @@ table.dataTable tbody th, table.dataTable tbody td {
     color: #fff;
     padding: .6rem 1.25rem;
     font-size: 0.9em;
+    font-weight: bold;
 }
 .list-group-item.active {
     background: #1db954;
@@ -206,6 +261,20 @@ table.dataTable tbody th, table.dataTable tbody td {
 .tab-pane{
     transition: all .2s ease;
     font-size: 0.9em;
+}
+.nav-tabs a {
+    color: #414141;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+.nav-tabs .nav-link {
+    padding: 1rem 1rem;
+    background-color: #d8d8d8;
+}
+.nav-tabs .nav-link.active {
+    border-color: #dee2e6 #dee2e6 #000;
+    background-color: #1db954;
 }
 .custom-select:focus {
     outline: 0;
@@ -225,3 +294,7 @@ table.dataTable tbody th, table.dataTable tbody td {
     background-color: #1db954;
     box-shadow: inset 2px 2px 5px #56575a, inset -3px -3px 7px #eaeaea;
 }
+/* MODAL */
+/*.modal-body a{
+    color: #000;
+}*/
