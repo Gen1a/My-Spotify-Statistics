@@ -43,8 +43,8 @@ Session(app)
 
 
 #  Client Keys
-CLIENT_ID = ENV['CLIENT_ID']
-CLIENT_SECRET = ENV['CLIENT_SECRET']
+CLIENT_ID = os.environ.get('CLIENT_ID')
+CLIENT_SECRET = os.environ.get('CLIENT_SECRET')
 
 
 # ------------- Spotify Base URLS -------------
