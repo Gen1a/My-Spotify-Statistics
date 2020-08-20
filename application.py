@@ -57,7 +57,7 @@ SPOTIFY_TOKEN_URL = "https://accounts.spotify.com/api/token"
 CLIENT_SIDE_URL = "http://127.0.0.1"
 PORT = 8080
 REDIRECT_URI = "{}:{}/callback/q".format(CLIENT_SIDE_URL, PORT)
-SCOPE = "user-follow-read user-library-read user-read-email user-read-private user-read-recently-played user-top-read playlist-read-private playlist-modify-public playlist-modify-private streaming" # Modify space seperated list depending on application's functionalities
+SCOPE = "user-follow-read user-library-read user-read-email user-read-private user-read-recently-played user-top-read playlist-read-private playlist-modify-public playlist-modify-private streaming"
 STATE = ""
 SHOW_DIALOG_bool = True
 SHOW_DIALOG_str = str(SHOW_DIALOG_bool).lower()
@@ -477,4 +477,5 @@ def errorhandler(e):
 
 
 if __name__ == "__main__":
-    app.run(debug=True, port=PORT)
+    # Threaded option to enable multiple instances for multiple user access support
+    app.run(debug=True, port=PORT, threaded=True)
