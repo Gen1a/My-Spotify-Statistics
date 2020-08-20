@@ -3,6 +3,7 @@ import requests
 import base64
 import datetime
 import math
+import os
 
 import numpy as np # installed with matplotlib
 from matplotlib.figure import Figure
