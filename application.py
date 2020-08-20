@@ -44,8 +44,8 @@ Session(app)
 
 #  Client Keys
 CLIENT = json.load(open('conf.json', 'r+'))
-CLIENT_ID = CLIENT['id']
-CLIENT_SECRET = CLIENT['secret']
+CLIENT_ID = ENV['CLIENT_ID']
+CLIENT_SECRET = ENV['CLIENT_SECRET']
 
 
 # ------------- Spotify Base URLS -------------
