@@ -32,7 +32,7 @@ Playlist Analytics
 <div class="container-fluid content-block pb-3">
     <div class="row">
         <div class="col-12">
-            <h4 class="subtitle"><i class="gg-play-button-o"></i>Average Audio Features for "{{ playlist_name }}"</h4>
+            <h4 class="subtitle"><i class="gg-play-button-o"></i>Average Audio Features for <strong>{{ playlist_name }}</strong></h4>
             <hr class="my-4" />
         </div>
     </div>
@@ -44,7 +44,7 @@ Playlist Analytics
             <div class="list-group list-group-analytics" id="list-tab" role="tablist">
                 {% for key, value in playlist_features_data.items() %}
                 <a class="list-group-item list-group-item-action border-light {% if loop.first %} active {% endif %}" id="list-{{ key }}-list" data-toggle="list" href="#list-{{ key }}" role="tab" aria-controls="{{ key }}">
-                    {{ key|capitalize }} <p class="badge badge-pill float-right">{{ "%.3f"|format(value) }}</p>
+                    {{ key|capitalize }} <p class="badge badge-pill float-right">{{ "%.3f"|format(value) if key != "tempo" else "%.0f bpm"|format(value) }}</p>
                 </a>
                 {% endfor %}
             </div>

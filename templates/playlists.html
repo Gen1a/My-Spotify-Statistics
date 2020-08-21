@@ -27,13 +27,7 @@ My Playlists
                         <th scope="col" class="text-center">Owner</th>
                         <th scope="col" class="text-center">Total tracks</th>
                         <th scope="col" class="text-center">
-                            Playlist Analytics <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-info-circle" width="20" height="20" viewBox="0 0 24 24" stroke-width="2.5" stroke="#4CAF50" fill="none" stroke-linecap="round" stroke-linejoin="round"
-                                                    data-toggle="tooltip" data-placement="top" title="Loading may take a few seconds, depending on magnitude of the playlist.">
-                                <path stroke="none" d="M0 0h24v24H0z" />
-                                <circle cx="12" cy="12" r="9" />
-                                <line x1="12" y1="8" x2="12.01" y2="8" />
-                                <polyline points="11 12 12 12 12 16 13 16" />
-                            </svg>
+                            Playlist Analytics<i class="gg-info" id="foo" data-toggle="tooltip" data-placement="top" title="Loading may take a few seconds, depending on magnitude of the playlist."></i>
                         </th>
                     </tr>
                 </thead>
@@ -46,7 +40,7 @@ My Playlists
                         <td class="text-center align-middle">{{ counter.value }}</td>
                         <td class="text-center align-middle font-weight-bold">
                             <a class="text-reset" href="{{ url_for("playlist_items", playlist_id=playlist.id) }}">
-                                {{ playlist.name }}<i class="gg-eye"></i>
+                                {{ playlist.name }}<i class="gg-arrow-top-right-r"></i>
                             </a>
                         </td>
                         <td class="text-center align-middle"><a class="text-reset" data-toggle="tooltip" data-placement="top" title="Open user's profile in new tab" href="{{ playlist.owner.external_urls.spotify }}" target="_blank">{{ playlist.owner.display_name }}</a></td>

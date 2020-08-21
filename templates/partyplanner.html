@@ -87,8 +87,8 @@
     </div>
 </div>
 <!-- PLAYLIST GENERATION CONTAINER -->
-<div class="container content-block hidden pb-4" id="partyplanner-overview">
-    <div class="row">
+<div class="container-fluid content-block hidden pb-4" id="partyplanner-overview">
+    <div class="row d-flex justify-content-center">
         <div class="col-12">
             <h4><i class="gg-play-list"></i>Your Party Playlist</h4>
             <hr class="my-3" />
@@ -107,21 +107,21 @@
     </div>
     <!-- PLAYLIST CREATION CONTAINER -->
     <div class="row d-flex justify-content-center">
-        <div class="col-12">
+        <div class="col-12 col-md-10">
             <ul class="nav nav-tabs justify-content-around" role="tablist">
                 <li class="nav-item w-50" role="presentation">
-                    <a class="nav-link active" id="playlist-tab" data-toggle="tab" href="#playlist-tab-content" role="tab" aria-controls="playlist-tab-content" aria-selected="true"><i class="gg-layout-list"></i>Playlist</a>
+                    <a class="nav-link h-100 active" id="playlist-tab" data-toggle="tab" href="#playlist-tab-content" role="tab" aria-controls="playlist-tab-content" aria-selected="true"><i class="gg-layout-list"></i>Playlist</a>
                 </li>
                 <li class="nav-item w-50" role="presentation">
-                    <a class="nav-link" id="features-tab" data-toggle="tab" href="#features-tab-content" role="tab" aria-controls="features-tab-content" aria-selected="false"><i class="gg-play-button-o"></i>Audio Features</a>
+                    <a class="nav-link h-100" id="features-tab" data-toggle="tab" href="#features-tab-content" role="tab" aria-controls="features-tab-content" aria-selected="false"><i class="gg-play-button-o"></i>Audio Features</a>
                 </li>
             </ul>
         </div>
     </div>
     <div class="row d-flex justify-content-center">
-        <div class="col-12">
+        <div class="col-12 col-md-10">
             <div class="tab-content">
-                <div class="tab-pane fade show active mt-1" id="playlist-tab-content" role="tabpanel" aria-labelledby="playlist-tab">
+                <div class="tab-pane fade show active mt-2" id="playlist-tab-content" role="tabpanel" aria-labelledby="playlist-tab">
                     <table class="table table-responsive table-striped">
                         <thead class="bg-dark text-white">
                             <tr>
@@ -130,13 +130,7 @@
                                 <th scope="col" class="text-center align-middle">Artist</th>
                                 <th scope="col" class="text-center">Duration (minutes)</th>
                                 <th scope="col" class="text-center">
-                                    Popularity <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-info-circle" width="20" height="20" viewBox="0 0 24 24" stroke-width="1.5" stroke="#4CAF50" fill="none" stroke-linecap="round" stroke-linejoin="round"
-                                                    data-toggle="tooltip" data-placement="top" title="The popularity is calculated by algorithm and is based, in the most part, on the total number of plays the track has had and how recent those plays are.">
-                                        <path stroke="none" d="M0 0h24v24H0z" />
-                                        <circle cx="12" cy="12" r="9" />
-                                        <line x1="12" y1="8" x2="12.01" y2="8" />
-                                        <polyline points="11 12 12 12 12 16 13 16" />
-                                    </svg>
+                                    Popularity<i class="gg-info" data-toggle="tooltip" data-placement="top" title="The popularity is calculated by algorithm and is based, in the most part, on the total number of plays the track has had and how recent those plays are."></i>
                                 </th>
                             </tr>
                         </thead>
@@ -144,7 +138,7 @@
                         </tbody>
                     </table>
                 </div>
-                <div class="tab-pane fade mt-1" id="features-tab-content" role="tabpanel" aria-labelledby="features-tab">
+                <div class="tab-pane fade mt-2" id="features-tab-content" role="tabpanel" aria-labelledby="features-tab">
                     <div id="partyplanner-info">
 
                     </div>

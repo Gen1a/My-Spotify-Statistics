@@ -41,46 +41,137 @@ ol ol li::before {
 /* NAVBAR */
 .navbar {
     background-color: #1db954;
-    color: #000;
 }
 nav .navbar-brand {
     font-weight: 600;
     font-size: x-large;
+    color: rgba(255, 255, 255, 0.9);
 }
-.navbar-nav {
+.navbar-nav, .navbar-nav .nav-link {
     font-weight: 700;
-    color: #000;
+    color: rgba(255, 255, 255, 0.9);
+}
+.nav-item:hover, .nav-link:hover {
+    color: #4e4e4e;
+}
+.navbar-toggler {
+    border-color: white;
+    ;
+}
+.navbar-toggler-icon {
+    background-image: url( "data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(0, 128, 0, 0.8)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E");
+}
+/* NAVBAR TOGGLER ICON TEST */
+.navbar-toggler {
+    border: none;
+    background: transparent !important;
+}
+
+    .navbar-toggler:focus {
+        outline: none;
+        background: transparent !important;
+    }
+
+    .navbar-toggler .icon-bar {
+        background-color: #fff;
+        transform: rotate(0deg) translate(0px, 0px);
+        transition: ease all .2s;
+    }
+
+    .navbar-toggler .icon-bar {
+        display: block;
+        width: 22px;
+        height: 2px;
+        border-radius: 1px;
+    }
+
+        .navbar-toggler .icon-bar + .icon-bar {
+            margin-top: 4px;
+        }
+
+.icon-bar:nth-child(2) {
+    width: 16px;
+    transition: ease all .2s;
+}
+
+.navbar-toggler:hover > .icon-bar:nth-child(2) {
+    width: 22px;
+    transition: ease all .2s;
+}
+
+.navbar-toggler:active > .icon-bar:nth-child(2) {
+    width: 22px;
+    transition: ease all .2s;
+}
+
+.navbar-toggler:not(.collapsed) .icon-bar:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 4px);
+    transition: ease all .2s;
+}
+
+.navbar-toggler:not(.collapsed) .icon-bar:nth-child(2) {
+    opacity: 0;
+    transition: ease all .2s;
+}
+
+.navbar-toggler:not(.collapsed) .icon-bar:nth-child(3) {
+    transform: rotate(-45deg) translate(4px, -4px);
+    transition: ease all .2s;
 }
 /* Set cursor of logout without href to pointer */
 #navbar-logout{
     cursor: pointer;
 }
-.gg-eye {
+.gg-info {
+    display: inline-block;
+    margin-left: -4px;
+    margin-bottom: 16px;
+    transform: scale(0.85);
+}
+th .gg-info {
     display: inline-block;
     margin-left: 4px;
-    margin-bottom: -2px;
+    margin-bottom: 0px;
+    transform: scale(0.85);
+}
+/* info icon in partyplanner list*/
+.list-group-item .gg-info {
+    display: inline-block;
+    margin-left: 0px;
+    margin-bottom: -5px;
+    transform: scale(0.7);
+}
+.gg-arrow-top-right-r {
+    display: inline-block;
+    margin-left: 6px;
+    margin-bottom: -5px;
+    transform: scale(0.75);
 }
 .gg-loadbar-sound {
     display: inline-block;
-    height: 26px;
+    height: 24px;
     width: 2px;
     margin-right: 12px;
+    transform: scale(1.2);
+    color: white;
 }
-.gg-insights, .gg-list, .gg-profile {
+.gg-insights, .gg-list, .gg-profile, .gg-search {
     display: inline-block;
     margin-right: 12px;
     margin-bottom: 3px;
+    transform: scale(1.4);
 }
-.gg-music-note, .gg-chart, .gg-play-button-o, .gg-disc, .gg-play-list, .gg-layout-list, .gg-share, .gg-vinyl{
+.gg-music-note, .gg-chart, .gg-play-button-o, .gg-disc, .gg-play-list, .gg-layout-list, .gg-share, .gg-vinyl {
     display: inline-block;
     margin-right: 18px;
     margin-bottom: 5px;
+    transform: scale(1.2);
 }
 .gg-chart{
     display: inline-block;
     margin-right: 14px;
     margin-bottom: 11px;
-
+    margin-left: 6px;
 }
 .gg-play-button-o {
     display: inline-block;
@@ -96,18 +187,18 @@ nav .navbar-brand {
 .container {
     width: 95%;
 }
-/* change on click color of dropdown items */
+/* DROPDOWN MENU */
 .dropdown-menu {
-    background: #29d867;
-    box-shadow: 3px 3px 6px #6a6b72, -3px -3px 6px #51e65d;
+    background: #1db954;
+    box-shadow: 3px 3px 6px #6a6b72, -3px -3px 6px #ffffff85;
 }
-.dropdown-item.active, .dropdown-item:active {
-    color: #000;
-    background-color: #808080;
+.dropdown-item {
+    font-weight: 500;
+    color: #fff;
 }
-.dropdown-item:hover {
-    box-shadow: inset 2px 2px 5px #73be7f, inset -3px -3px 6px #d4d4d4;
-    background: #2ef173;
+.dropdown-item:active {
+    font-weight: bold;
+    background-color: #189645;
 }
 .btn {
     border-radius: 8px;
@@ -294,7 +385,3 @@ table.dataTable tbody th, table.dataTable tbody td {
     background-color: #1db954;
     box-shadow: inset 2px 2px 5px #56575a, inset -3px -3px 7px #eaeaea;
 }
-/* MODAL */
-/*.modal-body a{
-    color: #000;
-}*/

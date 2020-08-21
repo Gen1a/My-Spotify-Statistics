@@ -94,14 +94,7 @@ Your Spotify Statistics
                         <th scope="col" class="text-center">Artist Image</th>
                         <th scope="col" class="text-center">Name</th>
                         <th scope="col" class="text-center">
-                            Popularity <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-info-circle" width="20" height="20" viewBox="0 0 24 24" stroke-width="1.5" stroke="#4CAF50" fill="none" stroke-linecap="round" stroke-linejoin="round"
-                                            data-toggle="tooltip" data-placement="top" title="The artist’s popularity is calculated from the popularity of all the artist’s tracks.">
-                                <path stroke="none" d="M0 0h24v24H0z" />
-                                <circle cx="12" cy="12" r="9" />
-                                <line x1="12" y1="8" x2="12.01" y2="8" />
-                                <polyline points="11 12 12 12 12 16 13 16" />
-                            </svg>
-                        </th>
+                            Popularity<i class="gg-info" data-toggle="tooltip" data-placement="top" title="The artist’s popularity is calculated from the popularity of all the artist’s tracks."></i>                        </th>
                         <th scope="col" class="text-center">Genre</th>
                     </tr>
                 </thead>
@@ -134,13 +127,8 @@ Your Spotify Statistics
 <div class="container content-block">
     <div class="row">
         <div class="col-12">
-            <h1><i class="gg-music-note"></i>Top 10 Genres: {{ time_range|capitalize|replace("_", " ") }} <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-info-circle align-top" width="20" height="20" viewBox="0 0 24 24" stroke-width="2.5" stroke="#414141" fill="none" stroke-linecap="round" stroke-linejoin="round"
-                                                                                  data-toggle="tooltip" data-placement="top" title="Based on your Top Artists">
-                    <path stroke="none" d="M0 0h24v24H0z" />
-                    <circle cx="12" cy="12" r="9" />
-                    <line x1="12" y1="8" x2="12.01" y2="8" />
-                    <polyline points="11 12 12 12 12 16 13 16" />
-                </svg>
+            <h1>
+                <i class="gg-music-note"></i>Top 10 Genres: {{ time_range|capitalize|replace("_", " ") }} <i class="gg-info" data-toggle="tooltip" data-placement="top" title="Based on your Top Artists"></i>
             </h1>
             <hr class="my-4" />
         </div>
@@ -177,7 +165,7 @@ Your Spotify Statistics
         </div>
     </div>
     <div class="row justify-content-center">
-        <div class="col-12 col-md-8">
+        <div class="col-12 col-md-10">
             <table class="table table-hover table-responsive datatable-overview bg-white">
                 <thead class="thead-dark">
                     <tr>
@@ -186,13 +174,7 @@ Your Spotify Statistics
                         <th scope="col" class="text-center">Song name</th>
                         <th scope="col" class="text-center">Artist</th>
                         <th scope="col" class="text-center">
-                            Popularity <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-info-circle" width="20" height="20" viewBox="0 0 24 24" stroke-width="1.5" stroke="#4CAF50" fill="none" stroke-linecap="round" stroke-linejoin="round"
-                                            data-toggle="tooltip" data-placement="top" title="The popularity is calculated by algorithm and is based, in the most part, on the total number of plays the track has had and how recent those plays are.">
-                                <path stroke="none" d="M0 0h24v24H0z" />
-                                <circle cx="12" cy="12" r="9" />
-                                <line x1="12" y1="8" x2="12.01" y2="8" />
-                                <polyline points="11 12 12 12 12 16 13 16" />
-                            </svg>
+                            Popularity<i class="gg-info" data-toggle="tooltip" data-placement="top" title="The popularity is calculated by algorithm and is based, in the most part, on the total number of plays the track has had and how recent those plays are."></i>
                         </th>
                     </tr>
                 </thead>

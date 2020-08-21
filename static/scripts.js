@@ -74,7 +74,7 @@ $(document).ready(function () {
                 $("#imagerow").empty();
                 // Show search results container
                 $('#search-results-grid').removeClass("hidden");
-                $('#search-results-info').text('Search results for "' + artist + '"');
+                $('#search-results-info').text('Search results for: "' + artist + '"');
                 // If no results found
                 if (response.artists.total == 0)
                     $("#imagerow").html("<div class='col'>No results found</div>");
@@ -265,11 +265,19 @@ $(document).ready(function () {
                 var infoElement = '<div class="row align-items-center"><div class="col-12 col-md-6">' +
                     '<div class="small-content-block text-center"><img src="data:image/png;base64,' + response.url + '" class="img-fluid features" alt="playlist features" /></div></div>' +
                     '<div class="col-12 col-md-6">' +
-                    '<ul class="list-group list-group-analytics my-2">' + 
-                    '<li class="list-group-item">Amount of tracks: <span class="badge badge-pill float-right">' + (trackCounter - 1) + '</span></li>' +
-                    '<li class="list-group-item">Playlist Duration: <span class="badge badge-pill float-right">' + formatDuration(playlistDuration) + '</span></li>' +
-                    '<li class="list-group-item">Top Genres: <span class="badge badge-pill float-right">' + response.top_genres[0][0] + (typeof(response.top_genres[1]) === "undefined" ? "" : " & ") + (typeof(response.top_genres[1]) === "undefined" ? "" : response.top_genres[1][0])  + '</span></li></ul></div>';
+                    '<ul class="list-group list-group-analytics my-2">' +
+                    '<li class="list-group-item">Amount of tracks<span class="badge badge-pill float-right">' + (trackCounter - 1) + '</span></li>' +
+                    '<li class="list-group-item">Playlist Duration<span class="badge badge-pill float-right">' + formatDuration(playlistDuration) + '</span></li>' +
+                    '<li class="list-group-item">Top Genres<span class="badge badge-pill float-right">' + response.top_genres[0][0] + (typeof (response.top_genres[1]) === "undefined" ? "" : " & ") + (typeof (response.top_genres[1]) === "undefined" ? "" : response.top_genres[1][0]) + '</span></li>' +
+                    '<li class="list-group-item" data-toggle="tooltip" data-placement="top" title="Danceability describes how suitable a track is for dancing based on a combination of musical elements including tempo, rhythm stability, beat strength, and overall regularity. A value of 0.0 is least danceable and 1.0 is most danceable.">Danceability <i class="gg-info"></i><span class="badge badge-pill float-right">' + response.features_data.danceability.toFixed(3) + '</span></li>' +
+                    '<li class="list-group-item" data-toggle="tooltip" data-placement="top" title="Energy is a measure from 0.0 to 1.0 and represents a perceptual measure of intensity and activity. Typically, energetic tracks feel fast, loud, and noisy. For example, death metal has high energy, while a Bach prelude scores low on the scale. Perceptual features contributing to this attribute include dynamic range, perceived loudness, timbre, onset rate, and general entropy.">Energy<i class="gg-info"></i><span class="badge badge-pill float-right">' + response.features_data.energy.toFixed(3) + '</span></li>' +
+                    '<li class="list-group-item" data-toggle="tooltip" data-placement="top" title="Speechiness detects the presence of spoken words in a track. The more exclusively speech-like the recording (e.g. talk show, audio book, poetry), the closer to 1.0 the attribute value. Values above 0.66 describe tracks that are probably made entirely of spoken words. Values between 0.33 and 0.66 describe tracks that may contain both music and speech, either in sections or layered, including such cases as rap music. Values below 0.33 most likely represent music and other non-speech-like tracks.">Speechiness<i class="gg-info"></i><span class="badge badge-pill float-right">' + response.features_data.speechiness.toFixed(3) + '</span></li>' +
+                    '<li class="list-group-item" data-toggle="tooltip" data-placement="top" title="A measure from 0.0 to 1.0 describing the musical positiveness conveyed by a track. Tracks with high valence sound more positive (e.g. happy, cheerful, euphoric), while tracks with low valence sound more negative (e.g. sad, depressed, angry).">Valence<i class="gg-info"></i><span class="badge badge-pill float-right">' + response.features_data.valence.toFixed(3) + '</span></li>' + 
+                    '<li class="list-group-item">Tempo<span class="badge badge-pill float-right">' + response.features_data.tempo.toFixed(0) + ' bpm</span></li>' + 
+                    '</ul ></div>';
                 $('#partyplanner-info').append(infoElement);
+                // Reload all tooltips
+                $('[data-toggle="tooltip"]').tooltip();
             },
             error: function () {
                 console.log("AJAX Request Failed.");

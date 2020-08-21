@@ -80,7 +80,10 @@ def get_playlist_audio_features(auth_header, tracks_ids):
     buf = BytesIO()
     fig.savefig(buf, format='png', facecolor='#757575')
     plot_url_features = base64.b64encode(buf.getbuffer()).decode()
-    return plot_url_features
+    features_container = {
+        "base64" : plot_url_features,
+        "data" : playlist_audio_features}
+    return features_container
 
 
 # ------------- User Requests -------------

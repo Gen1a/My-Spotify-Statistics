@@ -54,9 +54,9 @@ SPOTIFY_TOKEN_URL = "https://accounts.spotify.com/api/token"
 
 
 # ------------- Server-side Parameters -------------
+# Client side url as env variable to easily switch between local and heroku deployment
 CLIENT_SIDE_URL = os.environ.get('CLIENT_SIDE_URL')
 REDIRECT_URI = "{}/callback/q".format(CLIENT_SIDE_URL)
-#PORT = 8080
 SCOPE = "user-follow-read user-library-read user-read-email user-read-private user-read-recently-played user-top-read playlist-read-private playlist-modify-public playlist-modify-private streaming"
 STATE = ""
 SHOW_DIALOG_bool = True
@@ -372,7 +372,8 @@ def playlist_analytics(playlist_id):
         temp = playlist_audio_features.get(feature)
         playlist_audio_features[feature] = temp / len(tracks_ids)
     # Get base64 data from matplotlib
-    plot_url_features = helpers.get_playlist_audio_features(session["authorization_header"], tracks_ids)
+    features_container = helpers.get_playlist_audio_features(session["authorization_header"], tracks_ids)
+    plot_url_features = features_container["base64"]
 
     return render_template("playlist-analytics.html",
                         playlist_features_data=playlist_audio_features,
@@ -410,7 +411,8 @@ def request_data():
                     tracks_uris.append(top_tracks["tracks"][i]["uri"])
                 top_tracks_container[artist_id] = top_tracks
             # Get base64 data from matplotlib
-            plot_url_features = helpers.get_playlist_audio_features(session["authorization_header"], tracks_ids)
+            features_container = helpers.get_playlist_audio_features(session["authorization_header"], tracks_ids)
+            plot_url_features = features_container["base64"]
             # Calculate top genres for created playlist
             top_genres_container = {}
             for artist_id in artist_ids:
@@ -425,7 +427,8 @@ def request_data():
             return jsonify(top_tracks=top_tracks_container,
                            top_genres=sorted_genres,
                            tracks_uris=tracks_uris,
-                           url=plot_url_features)
+                           url=plot_url_features,
+                           features_data=features_container["data"])
     elif request.method == "POST":
         # Get post request payload
         payload = request.json
@@ -448,7 +451,6 @@ def request_data():
         new_playlist_href = new_playlist_object["tracks"]["href"]
         # Get new playlist external url
         new_playlist_url = new_playlist_object["external_urls"]["spotify"]
-        print(new_playlist_url)
         # Slice amount of tracks (Spotify API accepts max 100 tracks / request)
         tracks_amount = len(track_uris)
         slicer = slice(0, 100)

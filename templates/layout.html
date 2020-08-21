@@ -23,7 +23,7 @@
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.js"></script>
     <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
     <!-- Popularity Icons -->
-    <link href="https://css.gg/css?=chart|crowdfire|disc|eye|insights|layout-list|loadbar-sound|music-note|play-button-o|play-list|profile|list|share|vinyl" rel='stylesheet'>
+    <link href="https://css.gg/css?=arrow-top-right-r|chart|crowdfire|disc|info|insights|layout-list|loadbar-sound|music-note|play-button-o|play-list|profile|list|search|share|vinyl" rel='stylesheet'>
     <!-- Own CSS Stylesheet -->
     <link href="{{ url_for("static", filename="styles.css") }}" rel="stylesheet">
 
@@ -31,10 +31,13 @@
 </head>
 <body>
     <!-- Navigation bar -->
-    <nav class="navbar fixed-top navbar-expand-lg navbar-light">
+    <nav class="navbar fixed-top navbar-expand-lg">
         <a class="navbar-brand d-flex" href="{{ url_for("profile") }}"><i class="gg-loadbar-sound"></i>My Spotify Statistics</a>
-        <button aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler" data-target="#navbar" data-toggle="collapse" type="button">
-            <span class="navbar-toggler-icon"></span>
+        <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="icon-bar top-bar"></span>
+            <span class="icon-bar middle-bar"></span>
+            <span class="icon-bar bottom-bar"></span>
+            <span class="sr-only">Toggle navigation</span>
         </button>
         <div class="collapse navbar-collapse" id="navbar">
             {% if session.authorization_header %}
