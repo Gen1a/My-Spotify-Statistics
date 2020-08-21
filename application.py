@@ -10,7 +10,7 @@ from matplotlib.figure import Figure
 from io import BytesIO # used to create memory buffer for matplotlib figures
 from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas 
 
-from flask import Flask, g, jsonify, redirect, render_template, request, Response, session, url_for
+from flask import Flask, g, jsonify, redirect, render_template, request, Response, session, send_from_directory, url_for
 from flask_session import Session
 from tempfile import mkdtemp
 from urllib.parse import quote
