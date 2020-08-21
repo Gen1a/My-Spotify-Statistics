@@ -56,8 +56,7 @@ SPOTIFY_TOKEN_URL = "https://accounts.spotify.com/api/token"
 # ------------- Server-side Parameters -------------
 #CLIENT_SIDE_URL = "https://my-spotify-statistics.herokuapp.com"
 #CLIENT_SIDE_URL = "https://intense-sea-06332.herokuapp.com"
-CLIENT_SIDE_URL = request.base_url
-print(CLIENT_SIDE_URL)
+CLIENT_SIDE_URL = request.url
 #PORT = 8080
 REDIRECT_URI = "{}/callback/q".format(CLIENT_SIDE_URL)
 SCOPE = "user-follow-read user-library-read user-read-email user-read-private user-read-recently-played user-top-read playlist-read-private playlist-modify-public playlist-modify-private streaming"
