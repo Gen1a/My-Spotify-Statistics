@@ -56,7 +56,6 @@ nav .navbar-brand {
 }
 .navbar-toggler {
     border-color: white;
-    ;
 }
 .navbar-toggler-icon {
     background-image: url( "data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(0, 128, 0, 0.8)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E");
@@ -235,6 +234,9 @@ th .gg-info {
     /* prevent inheritance of neumorphism buttons */
     box-shadow: none;
 }
+.card {
+    border-radius: 10px;
+}
 .card-index {
     max-width: 350px;
     background-color: #FFF;
@@ -248,7 +250,7 @@ th .gg-info {
 }
 .card-index .card-title {
     position: absolute;
-    left: 15px;
+    left: 12px;
     bottom: 10px;
     color: #FFF;
     text-shadow: 1px 1px 1px black;
@@ -258,7 +260,7 @@ th .gg-info {
 .card-index .card-text {
     position: absolute;
     bottom: -115px;
-    left: 15px;
+    left: 12px;
     color: #FFF;
     text-shadow: 1px 1px 1px black;
     font-size: 13px;
@@ -268,10 +270,10 @@ th .gg-info {
     filter: grayscale(100%) blur(3px);
 }
 .card-index:hover .card-title{
-    bottom: 150px;
+    bottom: 135px;
 }
 .card-index:hover .card-text {
-    bottom: 40px;
+    bottom: 32px;
 }
 .card-img-top {
     border-radius: 10px;
