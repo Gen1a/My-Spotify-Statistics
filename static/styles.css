@@ -160,17 +160,18 @@ th .gg-info {
     margin-bottom: 3px;
     transform: scale(1.4);
 }
-.gg-music-note, .gg-chart, .gg-play-button-o, .gg-disc, .gg-play-list, .gg-layout-list, .gg-share, .gg-vinyl {
+.gg-music-note, .gg-play-button-o, .gg-disc, .gg-play-list, .gg-layout-list, .gg-share, .gg-vinyl {
     display: inline-block;
     margin-right: 18px;
     margin-bottom: 5px;
     transform: scale(1.2);
 }
-.gg-chart{
+.gg-chart, .gg-play-track-next {
     display: inline-block;
     margin-right: 14px;
     margin-bottom: 11px;
     margin-left: 6px;
+    transform: scale(1.2);
 }
 .gg-play-button-o {
     display: inline-block;
