@@ -37,7 +37,6 @@ app.jinja_env.filters["minutes"] = minutes
 app.jinja_env.filters["datetimeformat"] = datetimeformat
 
 # Configure session to use filesystem
-app.config['SECRET_KEY'] = os.urandom(64)
 app.config["SESSION_FILE_DIR"] = mkdtemp()
 app.config["SESSION_PERMANENT"] = True
 app.config["SESSION_TYPE"] = "filesystem"
@@ -126,6 +125,7 @@ def index():
     """ Shows landing page """
     if session.get("authorization_header") is not None:
         return redirect(url_for('profile'))
+
     return render_template("index.html")
 
 
@@ -139,10 +139,14 @@ def favicon():
 @app.route("/login")
 def login():
     """ Shows login page """
+    if session.get("authorization_header") is not None:
+        return redirect(url_for('profile'))
+
     return render_template("login.html")
 
 
 @app.route("/logout")
+@helpers.login_required
 def logout():
     """ Logs user out """
     # Forget any user_id
