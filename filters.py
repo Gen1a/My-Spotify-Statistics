@@ -14,9 +14,10 @@ def minutes(value):
     return output
 
 def datetimeformat(value):
-    """ Converts ISO 8601 format to YYYY-MM-DD"""
+    """ Converts ISO 8601 UTC format to YYYY-MM-DD"""
     if value is None:
         return ""
     # Create date object from given ISO 8601 string
-    temp = datetime.datetime.fromisoformat(value.replace("Z", "+00:00"))
+    print(value)
+    temp = datetime.datetime.strptime(value, '%Y-%m-%dT%H:%M:%SZ')
     return temp.strftime("%Y-%m-%d")
