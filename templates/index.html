@@ -8,14 +8,15 @@ Homepage
 <div class="jumbotron">
     <div class="row">
         <div class="col-12 col-md-10">
-            <h1 class="display-4">Hi there, stranger!</h1>
+            <h1 class="display-4">Welcome!</h1>
             <p class="lead">
                 This webapplication has been developed by a young and ambitious student Applied Informatics
                 from Ghent. Although some of this application's features are also provided by Spotify's application,
                 you can find some interesting and even handy features about your very own 'Spotify Footprint' below!
             </p>
             <hr class="my-4" />
-            <p class="lead"><em><small>Want to give it a go?</small></em></p>
+            <p class="lead"><em><small>Note: this web application can be used on both mobile and pc environment, although pc is recommended</small></em></p>
+            <p class="lead"><small>Want to give it a go?</small></p>
             <p>
                 <a class="btn" href="{{ url_for("login") }}">Get started</a>
             </p>
@@ -34,20 +35,19 @@ Homepage
         <div class="col-lg-4">
             <div class="card card-index mb-3 mr-3">
                 <img src="{{ url_for("static", filename="images/playlist.jpg") }}" class="card-img-top" alt="playlist" />
-                <h4 class="card-title">Playlist Overview</h4>
+                <h4 class="card-title">Profile Overview</h4>
                 <p class="card-text">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque ac tincidunt mauris, ut pulvinar justo.
-                    Phasellus tristique volutpat est, ut cursus massa pretium ac. Nam gravida leo quis magna dictum, lobortis convallis orci ornare.
+                    Get a nice overview of your Spotify Profile, eg. your followers, followed artists, saved playlists, saved tracks, recently played tracks...
                 </p>
             </div>
         </div>
         <div class="col-lg-4">
             <div class="card card-index mb-3 mr-3">
                 <img src="{{ url_for("static", filename="images/binoculars.jpg") }}" class="card-img-top" alt="binoculars" />
-                <h4 class="card-title">Search Spotify Database</h4>
+                <h4 class="card-title">Spotify Footprint</h4>
                 <p class="card-text">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque ac tincidunt mauris, ut pulvinar justo.
-                    Phasellus tristique volutpat est, ut cursus massa pretium ac. Nam gravida leo quis magna dictum, lobortis convallis orci ornare.
+                    Always wanted to know what your Top Tracks, Top Artists and Top Genres are?
+                    This feature will give you access to all 3, ranging from short term (4 weeks) to long term (all time)!
                 </p>
             </div>
         </div>
@@ -56,8 +56,8 @@ Homepage
                 <img src="{{ url_for("static", filename="images/analytics2.jpg") }}" class="card-img-top" alt="analytics" />
                 <h4 class="card-title">Analytics</h4>
                 <p class="card-text">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque ac tincidunt mauris, ut pulvinar justo.
-                    Phasellus tristique volutpat est, ut cursus massa pretium ac. Nam gravida leo quis magna dictum, lobortis convallis orci ornare.
+                    This will give you access to both Track Analytics (for a single track) and Playlist Analytics (for one of your saved playlists).
+                    Get deeper insight in a track or playlist's combined audio features like danceability, instrumentalness, liveness, tempo and loudness.
                 </p>
             </div>
         </div>
@@ -69,18 +69,18 @@ Homepage
                 <img src="{{ url_for("static", filename="images/party.jpg") }}" class="card-img-top" alt="party" />
                 <h4 class="card-title">Party Planner</h4>
                 <p class="card-text">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque ac tincidunt mauris, ut pulvinar justo.
-                    Phasellus tristique volutpat est, ut cursus massa pretium ac. Nam gravida leo quis magna dictum, lobortis convallis orci ornare.
+                    Create a unique playlist which will suit every party guest by combining your guests' top artists' top tracks,
+                    all this in just a few clicks.
                 </p>
             </div>
         </div>
         <div class="col-lg-4">
             <div class="card card-index mb-3 mr-3">
                 <img src="{{ url_for("static", filename="images/running2.png") }}" class="card-img-top" alt="running" />
-                <h4 class="card-title">Running Planner</h4>
+                <h4 class="card-title">Running Tool</h4>
                 <p class="card-text">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque ac tincidunt mauris, ut pulvinar justo.
-                    Phasellus tristique volutpat est, ut cursus massa pretium ac. Nam gravida leo quis magna dictum, lobortis convallis orci ornare.
+                    Struggling to find a playlist which perfectly suits your running tempo?
+                    This tool will create a playlist which consists of songs of roughly the same beats per minute (bpm) in your preferred genre (COMING SOON!)
                 </p>
             </div>
         </div>
@@ -89,8 +89,8 @@ Homepage
                 <img src="{{ url_for("static", filename="images/lightbulb.jpg") }}" class="card-img-top" alt="lightbulb" />
                 <h4 class="card-title">Your own feature?</h4>
                 <p class="card-text">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque ac tincidunt mauris, ut pulvinar justo.
-                    Phasellus tristique volutpat est, ut cursus massa pretium ac. Nam gravida leo quis magna dictum, lobortis convallis orci ornare.
+                    Got a great idea you've always wanted to put into practice, or some feature you wished some developer at Spotify would build?
+                    Get in touch by clicking the 'Contact' button and hopefully we'll speak to eachother soon to combine our forces!
                 </p>
             </div>
         </div>
