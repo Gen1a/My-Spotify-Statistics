@@ -1,5 +1,5 @@
 import math
-from datetime import datetime
+import datetime
 
 # ------------- Custom filters -------------
 def minutes(value):
@@ -18,5 +18,5 @@ def datetimeformat(value):
     if value is None:
         return ""
     # Create date object from given ISO 8601 string
-    temp = datetime.fromisoformat(value.replace("Z", "+00:00"))
+    temp = datetime.datetime.fromisoformat(value.replace("Z", "+00:00"))
     return temp.strftime("%Y-%m-%d")
