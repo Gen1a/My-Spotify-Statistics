@@ -5,7 +5,7 @@ Your Spotify Statistics
 {% endblock %}
 
 {% block main %}
-<div class="container content-block pb-4">
+<div class="container content-block pb-2">
     <div class="row">
         <div class="col-12">
             <h1><i class="gg-chart"></i>Your Spotify Statistics</h1>
@@ -20,10 +20,9 @@ Your Spotify Statistics
                 <div class="card-body">
                     <h4 class="card-title">My Top Tracks</h4>
                     <p class="card-text">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque ac tincidunt mauris, ut pulvinar justo.
-                        Phasellus tristique volutpat est, ut cursus massa pretium ac. Nam gravida leo quis magna dictum, lobortis convallis orci ornare.
+                        The tracks where you just couldn't resist to not press the 'Back to start' button. Why don't you press that button again?
                     </p>
-                    <button type="button" class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <button type="button" class="btn btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Choose time range
                     </button>
                     <div class="dropdown-menu dropdown-menu-right">
@@ -40,10 +39,9 @@ Your Spotify Statistics
                 <div class="card-body">
                     <h4 class="card-title">My Top Artists</h4>
                     <p class="card-text">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque ac tincidunt mauris, ut pulvinar justo.
-                        Phasellus tristique volutpat est, ut cursus massa pretium ac. Nam gravida leo quis magna dictum, lobortis convallis orci ornare.
+                        The artists you're most likely stalking on Instagram, Twitter and Facebook and you're booking a ticket for in the post-Corona era. 
                     </p>
-                    <button type="button" class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <button type="button" class="btn btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Choose time range
                     </button>
                     <div class="dropdown-menu dropdown-menu-right">
@@ -60,13 +58,12 @@ Your Spotify Statistics
                 <div class="card-body">
                     <h4 class="card-title">My Top Genres</h4>
                     <p class="card-text">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque ac tincidunt mauris, ut pulvinar justo.
-                        Phasellus tristique volutpat est, ut cursus massa pretium ac. Nam gravida leo quis magna dictum, lobortis convallis orci ornare.
+                        Based on your Top Artists, this will give you a statistically correct answer to the question "So, what kind of music are you listening to?".
                     </p>
-                    <button type="button" class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <button type="button" class="btn btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Choose time range
                     </button>
-                    <div class="dropdown-menu dropdown-menu-right">
+                    <div class="dropdown-menu dropdown-menu-top">
                         <a class="dropdown-item" href="{{ url_for("user_statistics", type="genres", time_range="short_term") }}">Short term (4 weeks)</a>
                         <a class="dropdown-item" href="{{ url_for("user_statistics", type="genres", time_range="medium_term") }}">Medium term (6 months)</a>
                         <a class="dropdown-item" href="{{ url_for("user_statistics", type="genres", time_range="long_term") }}">Long term (All time)</a>
