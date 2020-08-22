@@ -92,7 +92,7 @@ def callback():
     # If user accepts access request:
     auth_token = request.args['code'] # Store query parameter 'code' which contains an authorization code that can be exchanged for an access token
     
-    # Auth Step 2.0: Requests access and refresh tokens from Spotify
+    # Auth Step 2.0: Requests access and refresh token from Spotify
     code_payload = {
         "grant_type": "authorization_code",
         "code": str(auth_token),
@@ -100,7 +100,6 @@ def callback():
         #'client_id': CLIENT_ID, #if using non-base64-encoded way
         #'client_secret': CLIENT_SECRET, #if using non-base64-encoded way
     }
-
     # Syntax base64 encoded header: Authorization: Basic *<base64 encoded client_id:client_secret>*
     base64encoded = base64.b64encode(("{}:{}".format(CLIENT_ID, CLIENT_SECRET)).encode())
     headers = {"Authorization": "Basic {}".format(base64encoded.decode())}
@@ -111,7 +110,7 @@ def callback():
     response_data = json.loads(post_request.text)
     access_token = response_data["access_token"]
     token_type = response_data["token_type"]
-    expires_in = response_data["expires_in"]
+    expires_in = response_data["expires_in"] # Default: 3600s (=60min)
     refresh_token = response_data["refresh_token"]
 
     # Auth Step 3.0: Implement the access token in Authorization header to access Spotify API
@@ -129,6 +128,7 @@ def index():
 
 @app.route('/favicon.ico')
 def favicon():
+    """ Route to favicon directory """
     return send_from_directory(os.path.join(app.root_path, 'static'),
                                'favicon-w.ico', mimetype='image/vnd.microsoft.icon')
 
