@@ -36,9 +36,10 @@ def after_request(response):
 app.jinja_env.filters["minutes"] = minutes
 app.jinja_env.filters["datetimeformat"] = datetimeformat
 
-# Configure session to use filesystem (instead of signed cookies)
+# Configure session to use filesystem
+app.config['SECRET_KEY'] = os.urandom(64)
 app.config["SESSION_FILE_DIR"] = mkdtemp()
-app.config["SESSION_PERMANENT"] = False
+app.config["SESSION_PERMANENT"] = True
 app.config["SESSION_TYPE"] = "filesystem"
 Session(app)
 
@@ -123,6 +124,8 @@ def callback():
 @app.route("/")
 def index():
     """ Shows landing page """
+    if session.get("authorization_header") is not None:
+        return redirect(url_for('profile'))
     return render_template("index.html")
 
 
@@ -475,13 +478,15 @@ def request_data():
 #def test():
 
 
-# Error handler
+# Error handlers
 @app.errorhandler(Exception)
-def errorhandler(e):
+def handle_exception(e):
     """Handle error"""
-    if not isinstance(e, HTTPException):
-        e = InternalServerError()
-    return render_template("error.html", message=e)
+    # Pass through HTTP errors
+    if isinstance(e, HTTPException):
+        return render_template("error.html", message=e)
+    # Non HTTP errors
+    return render_template("error.html", message=e), 500
 
 
 if __name__ == "__main__":

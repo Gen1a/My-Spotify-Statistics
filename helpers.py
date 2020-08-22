@@ -2,7 +2,7 @@ import os
 import requests
 import json
 import urllib.parse
-from flask import redirect, render_template, request, session
+from flask import redirect, render_template, request, session, url_for
 from functools import wraps
 
 import numpy as np # installed with matplotlib
@@ -23,10 +23,10 @@ def login_required(f):
     http://flask.pocoo.org/docs/1.0/patterns/viewdecorators/
     """
     @wraps(f)
-    def decorated_function():
+    def decorated_function(*args, **kwargs):
         if session.get("authorization_header") is None:
-            return redirect("/login")
-        return f()
+            return redirect(url_for('login'))
+        return f(*args, **kwargs)
     return decorated_function
 
 
