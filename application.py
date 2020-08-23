@@ -445,37 +445,66 @@ def request_data():
     elif request.method == "POST":
         # Get post request payload
         payload = request.json
-        # Get playlist name from payload
-        playlist_name = payload['name']
-        # Get playlist description from payload
-        playlist_description = payload['description']
-        if playlist_description == '':
-            playlist_description =  'Party Playlist created by My Spotify Statistics.'
-        # Get track uris from payload and convert from JSON string to list
-        track_uris = json.loads(payload['uris'])
-        # Create the Spotify playlist
-        user_profile_data = helpers.get_my_profile(session["authorization_header"])
-        user_id = user_profile_data["id"]
-        new_playlist_object = helpers.create_playlist(session["authorization_header"],
-                                                      user_id,
-                                                      playlist_name,
-                                                      playlist_description)
-        # Get new playlist api endpoint from new playlist object
-        new_playlist_href = new_playlist_object["tracks"]["href"]
-        # Get new playlist external url
-        new_playlist_url = new_playlist_object["external_urls"]["spotify"]
-        # Slice amount of tracks (Spotify API accepts max 100 tracks / request)
-        tracks_amount = len(track_uris)
-        slicer = slice(0, 100)
-        track_uris_body = {}
-        for i in range(0, math.floor(tracks_amount / 100.0) + 1):
-            slicer = slice((100 * i), ((100 * i) + 100), 1)
-            track_uris_body["uris"] = track_uris[slicer]
-            playlist_snapshot = requests.post(new_playlist_href,
-                                          headers=session["authorization_header"],
-                                          data=json.dumps(track_uris_body))
-
-        return jsonify(new_playlist_url)
+        # Create Spotify Playlist Request
+        if payload["type"] == "create-playlist":
+            # Get playlist name from payload
+            playlist_name = payload['name']
+            # Get playlist description from payload
+            playlist_description = payload['description']
+            if playlist_description == '':
+                playlist_description =  'Party Playlist created by My Spotify Statistics.'
+            # Get track uris from payload and convert from JSON string to list
+            track_uris = json.loads(payload['uris'])
+            # Create the Spotify playlist
+            user_profile_data = helpers.get_my_profile(session["authorization_header"])
+            user_id = user_profile_data["id"]
+            new_playlist_object = helpers.create_playlist(session["authorization_header"],
+                                                          user_id,
+                                                          playlist_name,
+                                                          playlist_description)
+            # Get new playlist api endpoint from new playlist object
+            new_playlist_href = new_playlist_object["tracks"]["href"]
+            # Get new playlist external url
+            new_playlist_url = new_playlist_object["external_urls"]["spotify"]
+            # Slice amount of tracks (Spotify API accepts max 100 tracks / request)
+            tracks_amount = len(track_uris)
+            slicer = slice(0, 100)
+            track_uris_body = {}
+            for i in range(0, math.floor(tracks_amount / 100.0) + 1):
+                slicer = slice((100 * i), ((100 * i) + 100), 1)
+                track_uris_body["uris"] = track_uris[slicer]
+                playlist_snapshot = requests.post(new_playlist_href,
+                                              headers=session["authorization_header"],
+                                              data=json.dumps(track_uris_body))
+            return jsonify(new_playlist_url)
+        # Build User Statistics Request
+        elif payload["type"] == "user-statistics":
+            # Get requested statistics type and time range
+            stat_type = payload["stat_type"]
+            time_range = payload["time_range"]
+            # Return requested user statistics
+            if stat_type == "artists":
+                top_artists_data = helpers.get_top_artists(session["authorization_header"], time_range)
+                return jsonify(top_artists=top_artists_data["items"])
+            elif stat_type == "tracks":
+                top_tracks_data = helpers.get_my_top_tracks(session["authorization_header"], time_range)
+                return jsonify(top_tracks=top_tracks_data["items"])
+            elif stat_type == "genres":
+                top_artists_data = helpers.get_top_artists(session["authorization_header"], time_range)
+                # Define most popular genre from top artists
+                genres_data = {}
+                for item in top_artists_data["items"]:
+                    genres_list = item["genres"]
+                    for genre in genres_list:
+                        if genre in genres_data:
+                            genres_data[genre] += 1
+                        else:
+                            genres_data[genre] = 1
+                # Returns a list of genres, sorted on the value
+                sorted_genres = sorted(genres_data.items(), key=lambda x: x[1], reverse=True)
+                return jsonify(top_genres=sorted_genres)
+            else:
+                return None
 
 
 #@app.route("/test")

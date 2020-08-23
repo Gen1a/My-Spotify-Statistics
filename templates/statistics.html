@@ -25,10 +25,10 @@ Your Spotify Statistics
                     <button type="button" class="btn btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Choose time range
                     </button>
-                    <div class="dropdown-menu dropdown-menu-right">
-                        <a class="dropdown-item" href="{{ url_for("user_statistics", type="tracks", time_range="short_term") }}">Short term (4 weeks)</a>
-                        <a class="dropdown-item" href="{{ url_for("user_statistics", type="tracks", time_range="medium_term") }}">Medium term (6 months)</a>
-                        <a class="dropdown-item" href="{{ url_for("user_statistics", type="tracks", time_range="long_term") }}">Long term (All time)</a>
+                    <div class="dropdown-menu dropdown-menu-right statistics">
+                        <button class="dropdown-item" type="button" name="tracks" value="short_term">Short term (4 weeks)</button>
+                        <button class="dropdown-item" type="button" name="tracks" value="medium_term">Medium term (6 months)</button>
+                        <button class="dropdown-item" type="button" name="tracks" value="long_term">Long term (All time)</button>
                     </div>
                 </div>
             </div>
@@ -44,10 +44,10 @@ Your Spotify Statistics
                     <button type="button" class="btn btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Choose time range
                     </button>
-                    <div class="dropdown-menu dropdown-menu-right">
-                        <a class="dropdown-item" href="{{ url_for("user_statistics", type="artists", time_range="short_term") }}">Short term (4 weeks)</a>
-                        <a class="dropdown-item" href="{{ url_for("user_statistics", type="artists", time_range="medium_term") }}">Medium term (6 months)</a>
-                        <a class="dropdown-item" href="{{ url_for("user_statistics", type="artists", time_range="long_term") }}">Long term (All time)</a>
+                    <div class="dropdown-menu dropdown-menu-right statistics">
+                        <button class="dropdown-item" type="button" name="artists" value="short_term">Short term (4 weeks)</button>
+                        <button class="dropdown-item" type="button" name="artists" value="medium_term">Medium term (6 months)</button>
+                        <button class="dropdown-item" type="button" name="artists" value="long_term">Long term (All time)</button>
                     </div>
                 </div>
             </div>
@@ -63,13 +63,34 @@ Your Spotify Statistics
                     <button type="button" class="btn btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Choose time range
                     </button>
-                    <div class="dropdown-menu dropdown-menu-top">
-                        <a class="dropdown-item" href="{{ url_for("user_statistics", type="genres", time_range="short_term") }}">Short term (4 weeks)</a>
-                        <a class="dropdown-item" href="{{ url_for("user_statistics", type="genres", time_range="medium_term") }}">Medium term (6 months)</a>
-                        <a class="dropdown-item" href="{{ url_for("user_statistics", type="genres", time_range="long_term") }}">Long term (All time)</a>
+                    <div class="dropdown-menu dropdown-menu-top statistics">
+                        <button class="dropdown-item" type="button" name="genres" value="short_term">Short term (4 weeks)</button>
+                        <button class="dropdown-item" type="button" name="genres" value="medium_term">Medium term (6 months)</button>
+                        <button class="dropdown-item" type="button" name="genres" value="long_term">Long term (All time)</button>
                     </div>
                 </div>
             </div>
+        </div>
+    </div>
+</div>
+<!-- STATISTICS RESULTS CONTAINER -->
+<div class="container content-block hidden" id="statistics-overview">
+    <div class="row">
+        <div class="col-12">
+            <h1 id="statistics-type"><i class="gg-music-note"></i></h1>
+            <hr class="my-4" />
+        </div>
+    </div>
+    <div class="row d-flex justify-content-center">
+        <div class="col-12 col-md-8">
+            <table class="table table-striped table-responsive bg-white">
+                <thead class="bg-dark text-white" id="statistics-table-head">
+
+                </thead>
+                <tbody id="statistics-table-body">
+
+                </tbody>
+            </table>
         </div>
     </div>
 </div>

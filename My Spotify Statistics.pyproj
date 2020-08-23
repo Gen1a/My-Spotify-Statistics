@@ -45,7 +45,7 @@
     <Content Include="static\images\party.jpg" />
     <Content Include="static\images\playlist.jpg" />
     <Content Include="requirements.txt" />
-    <Content Include="static\images\favicon.ico" />
+    <Content Include="static\favicon.ico" />
     <Content Include="static\images\running2.jpg" />
     <Content Include="static\images\tracks.jpg" />
     <Content Include="static\scripts.js" />
