@@ -31,32 +31,34 @@ Track Analytics
             <!-- SEARCH RESULTS-->
             <h5 class="font-italic mt-3"><i class="gg-search"></i> Search results for: "{{ queries }}"</h5>
             <hr class="my-4" />
-            <table class="table table-hover table-responsive datatable-overview bg-white">
-                <thead class="bg-dark text-white">
-                    <tr>
-                        <th scope="col" class="text-center">Track Analytics</th>
-                        <th scope="col" class="text-center">Album Image</th>
-                        <th scope="col" class="text-center">Song Name</th>
-                        <th scope="col" class="text-center">Artist</th>
-                        <th scope="col" class="text-center">Album</th>
-                        <th scope="col" class="text-center">Duration (minutes)</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for track in tracks_data %}
-                    <tr>
-                        <td class="text-center align-middle">
-                            <a href="{{ url_for("track_analytics", track_id=track.id) }}" class="btn btn-sm track-analytics-button">View <svg height="20" viewBox="0 0 21 21" width="20" xmlns="http://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd" stroke="#1db954" stroke-linecap="round" stroke-linejoin="round" transform="translate(3 3)"><path d="m.5.5v12c0 1.1045695.8954305 2 2 2h11.5" /><path d="m3.5 8.5v3" /><path d="m7.5 5.5v6" /><path d="m11.5 2.5v9" /></g></svg></a>
-                        </td>
-                        <td class="text-center align-middle"><img class="rounded align-middle" src="{{ track.album.images[0].url }}" width="50" alt="album image" /></td>
-                        <td class="text-center align-middle">{{ track.name }}</td>
-                        <td class="text-center align-middle">{{ track.artists[0].name }}</td>
-                        <td class="text-center align-middle">{{ track.album.name }}</td>
-                        <td class="text-center align-middle">{{ track.duration_ms|minutes }}</td>
-                    </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
+            <div class="table-responsive">
+                <table class="table table-hover table-striped datatable-overview bg-white">
+                    <thead class="bg-dark text-white">
+                        <tr>
+                            <th scope="col" class="text-center">Track Analytics</th>
+                            <th scope="col" class="text-center">Album Image</th>
+                            <th scope="col" class="text-center">Song Name</th>
+                            <th scope="col" class="text-center">Artist</th>
+                            <th scope="col" class="text-center">Album</th>
+                            <th scope="col" class="text-center">Duration (minutes)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for track in tracks_data %}
+                        <tr>
+                            <td class="text-center align-middle">
+                                <a href="{{ url_for("track_analytics", track_id=track.id) }}" class="btn btn-sm track-analytics-button">View <svg height="20" viewBox="0 0 21 21" width="20" xmlns="http://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd" stroke="#1db954" stroke-linecap="round" stroke-linejoin="round" transform="translate(3 3)"><path d="m.5.5v12c0 1.1045695.8954305 2 2 2h11.5" /><path d="m3.5 8.5v3" /><path d="m7.5 5.5v6" /><path d="m11.5 2.5v9" /></g></svg></a>
+                            </td>
+                            <td class="text-center align-middle"><img class="rounded align-middle" src="{{ track.album.images[0].url }}" width="50" alt="album image" /></td>
+                            <td class="text-center align-middle">{{ track.name }}</td>
+                            <td class="text-center align-middle">{{ track.artists[0].name }}</td>
+                            <td class="text-center align-middle">{{ track.album.name }}</td>
+                            <td class="text-center align-middle">{{ track.duration_ms|minutes }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 </div>
