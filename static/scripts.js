@@ -121,11 +121,12 @@ $('.statistics button').on("click", function () {
                 }
                 $('#statistics-table-head').append(row);
             }
-            // Build statistics table body
-            if (stat_type == "tracks") {
-                // Add 1 row per track
-                for (let i = 0; i < response.top_tracks.length; i++) {
-                    console.log(response.top_tracks.length);
+            // Build statistics table body (tracks and artists)
+            if (stat_type == "tracks" || stat_type == "artists") {
+                // Store length of response
+                var results_length = stat_type == "tracks" ? response.top_tracks.length : response.top_artists.length;
+                // Add 1 row per track/artist response
+                for (let i = 0; i < results_length; i++) {
                     var row = $('<tr>');
                     // Calculate amount of columns
                     columns = $('#statistics-table-head').find("th").length;
@@ -137,21 +138,45 @@ $('.statistics button').on("click", function () {
                                 td.text(i + 1);
                                 break;
                             case 1:
-                                var img = $('<img>').addClass('rounded').attr({
-                                    src: response.top_tracks[i].album.images[0].url,
-                                    width: "50",
-                                    alt: "Album Image"
-                                });
+                                var img = $('<img>').addClass('rounded').attr("width", "50");
+                                if (stat_type == "tracks") {
+                                    img.attr({
+                                        src: response.top_tracks[i].album.images[0].url,
+                                        alt: "Album Image"
+                                    })
+                                }
+                                else {
+                                    img.attr({
+                                        src: response.top_artists[i].images[0].url,
+                                        alt: "Artist Image"
+                                    })
+                                }
                                 td.append(img);
                                 break;
                             case 2:
-                                td.text(response.top_tracks[i].name);
+                                if (stat_type == "tracks")
+                                    td.text(response.top_tracks[i].name);
+                                else
+                                    td.text(response.top_artists[i].name);
                                 break;
                             case 3:
-                                td.text(response.top_tracks[i].artists[0].name);
+                                if (stat_type == "tracks")
+                                    td.text(response.top_tracks[i].artists[0].name);
+                                else
+                                    td.text(response.top_artists[i].popularity);
                                 break;
                             case 4:
-                                td.text(response.top_tracks[i].popularity);
+                                if (stat_type == "tracks")
+                                    td.text(response.top_tracks[i].popularity);
+                                else {
+                                    let genres = "";
+                                    for (let k = 0; k < response.top_artists[i].genres.length; k++) {
+                                        genres += response.top_artists[i].genres[k];
+                                        if (k != response.top_artists[i].genres.length - 1)
+                                            genres += ", ";
+                                    }
+                                    td.text(genres);
+                                }
                                 break;
                             default:
                                 console.log("Statistics table body creation failed.");
@@ -159,7 +184,32 @@ $('.statistics button').on("click", function () {
                         row.append(td);
                     }
                     $('#statistics-table-body').append(row);
-                } 
+                }
+            }
+            // Build statistics table body (genres)
+            else if (stat_type == "genres") {
+                // Show Top 10 genres
+                for (let i = 0; i < 10; i++) {
+                    var row = $('<tr>');
+                    // Calculate amount of columns
+                    columns = $('#statistics-table-head').find("th").length;
+                    for (let j = 0; j < columns; j++) {
+                        // Add table data to row
+                        var td = $('<td>').addClass("text-center align-middle");
+                        switch (j) {
+                            case 0:
+                                td.text(i + 1);
+                                break;
+                            case 1:
+                                td.text(response.top_genres[i][0].charAt(0).toUpperCase() + response.top_genres[i][0].slice(1));
+                                break;
+                            default:
+                                console.log("Statistics table body creation failed.");
+                        }
+                        row.append(td);
+                    }
+                    $('#statistics-table-body').append(row);
+                }
             }
             // Reload all tooltips
             $('[data-toggle="tooltip"]').tooltip();
@@ -170,7 +220,11 @@ $('.statistics button').on("click", function () {
             $('#modal-body').text("Hmm, something went wrong :( Please contact the site owner to report the bug.");
         }
     });
-    
+    // Scroll to table results
+    setTimeout(function () {
+        let results = document.querySelector('#statistics-overview');
+        results.scrollIntoView({ behavior: "smooth", block: "start", inline: "nearest" });
+    }, 1000);
 });
 
 // Partyplanner: Link form enter button to click event of button
@@ -297,6 +351,11 @@ $('#artist-search').on("click", function () {
             $('#modal-body').text("Hmm, something went wrong :( Please contact the site owner to report the bug.");
         }
     });
+    // Scroll to playlist overview
+    setTimeout(function () {
+        let results = document.querySelector('#search-results-grid');
+        results.scrollIntoView({ behavior: "smooth", block: "start", inline: "nearest" });
+    }, 1000);
 });
 
 // Partyplanner: Generate Party Playlist button
@@ -304,7 +363,7 @@ $('#generate-playlist').on("click", function () {
     // Add loading spinner to button and reset back to normal
     var old_html = $('#generate-playlist').html();
     $('#generate-playlist').html('<div class="spinner-border text-success disabled" role="status"><span class= "sr-only">Loading...</span></div>');
-    setTimeout(function () { $('#generate-playlist').html(old_html); }, 7000);
+    setTimeout(function () { $('#generate-playlist').html(old_html); }, 5000);
     // Collect selected artist ids
     let selection_element = $('#artist-selection').find(".card");
     // Save artist ids
@@ -330,9 +389,9 @@ $('#generate-playlist').on("click", function () {
             // Show created playlist overview
             $('#partyplanner-overview').removeClass("hidden");
             // Show modal with information
-            $('#modal').modal('show');
-            $('#modal-title').text("Playlist generated");
-            $('#modal-body').text("Great! You can now check out your unique playlist's audio features and playlist content.");
+            //$('#modal').modal('show');
+            //$('#modal-title').text("Playlist generated");
+            //$('#modal-body').text("Great! You can now check out your unique playlist's audio features and playlist content.");
             // Calculate amount of columns
             columns = $('#playlist-tab-content').find("th").length;
             // Playlist info
@@ -424,6 +483,11 @@ $('#generate-playlist').on("click", function () {
             $('#modal-body').text("Hmm, something went wrong :( Please contact the site owner to report the bug.");
         }
     });
+    // Scroll to playlist overview
+    setTimeout(function () {
+        let results = document.querySelector('#partyplanner-overview');
+        results.scrollIntoView({ behavior: "smooth", block: "start", inline: "nearest" });
+    }, 3000);
 });
 
 // // Partyplanner: Create Party Playlist in Spotify Account

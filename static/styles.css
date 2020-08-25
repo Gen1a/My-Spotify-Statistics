@@ -394,3 +394,7 @@ table.dataTable tbody th, table.dataTable tbody td {
     background-color: #1db954;
     box-shadow: inset 2px 2px 5px #56575a, inset -3px -3px 7px #eaeaea;
 }
+/* Fix for scrollintoview with fixed-top navbar */
+#statistics-overview, #partyplanner-overview, #search-results-grid {
+    scroll-margin-top: 65px;
+}
