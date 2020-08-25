@@ -23,9 +23,22 @@ My first own side-project (and final project for HarvardX CS50) where I, try to,
 Authentication is done through [User Authentication with OAuth2.0](https://oauth.net/articles/authentication/) with the Authorization Code Flow.
 ![Authorization Code Flow](https://developer.spotify.com/assets/AuthG_AuthoriztionCode.png)
 *Note: handling of refresh tokens for extended sessions (> 60mins) has **not yet been implemented**. Due to the nature of this web application this will not result in any problems for users trying out the app for short periods of time.*
+
+## How to run in local environment (Windows users)?
+1. Create a virtual environment (eg. with Visual Studio)
+2. Set the required environment variables eg. with Windows Powershell after navigating to the local repository where you saved/cloned the project:
+   - For example: *C:\Users\frederik\source\repos\My Spotify Statistics\My Spotify Statistics\env> $ENV:FLASK_APP="application.py"*
+   - CLIENT_SIDE_URL="http://127.0.0.1:5000" (or any other localhost port)
+   - CLIENT_ID (you can create one yourself at the [Spotify for Developers Dashboard](https://developer.spotify.com/dashboard/applications))
+   - CLIENT_SECRET (ditto the above)
+   - FLASK_APP="application.py"
+   - FLASK_ENV="development"
+ 3. Navigate to the directory which contains the "FLASK_APP" application (usually 1 level up compared to the previous step)
+ 4. Run the Flask server through eg. *C:\Users\frederik\source\repos\My Spotify Statistics\My Spotify Statistics> flask run*
+
   
-  ## Technologies & Frameworks
-  - Python (Flask, Matplotlib)
-  - HTML, CSS (Bootstrap)
-  - Javascript (mostly jQuery)
+## Technologies & Frameworks
+- Python (Flask, Matplotlib)
+- HTML, CSS (Bootstrap)
+- Javascript (mostly jQuery)
 
