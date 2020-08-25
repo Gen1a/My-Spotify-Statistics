@@ -66,8 +66,8 @@ $('.statistics button').on("click", function () {
             // Show statistics result overview
             $('#statistics-overview').removeClass("hidden");
             // Build statistics table label
-            var header = "Top " + stat_type.charAt(0).toUpperCase() + stat_type.slice(1) + " (";
-            header += time_range.replace("_", " ") + ")";
+            var header = "Top " + stat_type.charAt(0).toUpperCase() + stat_type.slice(1) + " - ";
+            header += time_range.replace("_", " ");
             $('#statistics-type').text(header);
             // Build statistics table header
             if (stat_type == "tracks" || stat_type == "artists") {
@@ -221,7 +221,7 @@ $('.statistics button').on("click", function () {
         error: function () {
             $('#modal').modal('show');
             $('#modal-title').text("Sorry");
-            $('#modal-body').text("Hmm, something went wrong :( Please contact the site owner to report the bug.");
+            $('#modal-body').text("Hmm, something went wrong :( Please try logging out and loggin back in. Contact the site owner if the problem still persists.");
         }
     });
     // Scroll to table results
@@ -352,10 +352,9 @@ $('#artist-search').on("click", function () {
             console.log("AJAX Request failed.");
             $('#modal').modal('show');
             $('#modal-title').text("Sorry");
-            $('#modal-body').text("Hmm, something went wrong :( Please contact the site owner to report the bug.");
-        }
+            $('#modal-body').text("Hmm, something went wrong :( Please try logging out and loggin back in. Contact the site owner if the problem still persists.");        }
     });
-    // Scroll to playlist overview
+    // Scroll to search results
     setTimeout(function () {
         let results = document.querySelector('#search-results-grid');
         results.scrollIntoView({ behavior: "smooth", block: "start", inline: "nearest" });
@@ -484,8 +483,7 @@ $('#generate-playlist').on("click", function () {
             console.log("AJAX Request Failed.");
             $('#modal').modal('show');
             $('#modal-title').text("Sorry");
-            $('#modal-body').text("Hmm, something went wrong :( Please contact the site owner to report the bug.");
-        }
+            $('#modal-body').text("Hmm, something went wrong :( Please try logging out and loggin back in. Contact the site owner if the problem still persists.");        }
     });
     // Scroll to playlist overview
     setTimeout(function () {
@@ -536,7 +534,6 @@ $('#create-playlist').on("click", function () {
         error: function () {
             $('#modal').modal('show');
             $('#modal-title').text("Sorry");
-            $('#modal-body').text("Hmm, something went wrong :( Please contact the site owner to report the bug.");
-        }
+            $('#modal-body').text("Hmm, something went wrong :( Please try logging out and loggin back in. Contact the site owner if the problem still persists.");        }
     });
 });
