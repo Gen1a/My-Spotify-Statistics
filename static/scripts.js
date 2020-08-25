@@ -125,6 +125,8 @@ $('.statistics button').on("click", function () {
             if (stat_type == "tracks" || stat_type == "artists") {
                 // Store length of response
                 var results_length = stat_type == "tracks" ? response.top_tracks.length : response.top_artists.length;
+                // Add table-responsiveness
+                $('#statistics-table-head').parent().addClass("table-responsive");
                 // Add 1 row per track/artist response
                 for (let i = 0; i < results_length; i++) {
                     var row = $('<tr>');
@@ -191,6 +193,8 @@ $('.statistics button').on("click", function () {
                 // Show Top 10 genres
                 for (let i = 0; i < 10; i++) {
                     var row = $('<tr>');
+                    // Remove table-responsiveness
+                    $('#statistics-table-head').parent().removeClass("table-responsive");
                     // Calculate amount of columns
                     columns = $('#statistics-table-head').find("th").length;
                     for (let j = 0; j < columns; j++) {

@@ -13,14 +13,14 @@ Your Spotify Statistics
         </div>
     </div>
     <!-- STATISTICS CARDS -->
-    <div class="row">
+    <div class="row d-flex justify-content-center">
         <div class="col-12 col-md-4"  style="z-index: 2;">
-            <div class="card text-center mb-3 mr-3">
+            <div class="card text-center mb-3">
                 <img src="{{ url_for("static", filename="images/tracks.jpg") }}" class="card-img-top" alt="cassette" />
                 <div class="card-body">
                     <h4 class="card-title">My Top Tracks</h4>
                     <p class="card-text">
-                        The tracks where you just couldn't resist to not press the 'Back to start' button. Why don't you press that button again?
+                        The tracks during which you just couldn't resist to not press the 'Back to start' button or wish add an 'Eternal Repeat' button.
                     </p>
                     <button type="button" class="btn btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Choose time range
@@ -34,7 +34,7 @@ Your Spotify Statistics
             </div>
         </div>
         <div class="col-12 col-md-4" style="z-index: 1;">
-            <div class="card text-center mb-3 mr-3" >
+            <div class="card text-center mb-3" >
                 <img src="{{ url_for("static", filename="images/artists.jpg") }}" class="card-img-top" alt="music artist" />
                 <div class="card-body">
                     <h4 class="card-title">My Top Artists</h4>
@@ -53,7 +53,7 @@ Your Spotify Statistics
             </div>
         </div>
         <div class="col-12 col-md-4">
-            <div class="card text-center mb-3 mr-3">
+            <div class="card text-center mb-3">
                 <img src="{{ url_for("static", filename="images/genres.jpg") }}" class="card-img-top" alt="vinyl records" />
                 <div class="card-body">
                     <h4 class="card-title">My Top Genres</h4>
@@ -83,7 +83,7 @@ Your Spotify Statistics
     </div>
     <div class="row d-flex justify-content-center">
         <div class="col-12 col-md-10">
-            <table class="table table-striped bg-white">
+            <table class="table fixed-table-body table-striped bg-white">
                 <thead class="bg-dark text-white" id="statistics-table-head">
 
                 </thead>
