@@ -39,7 +39,6 @@
     <Content Include="static\images\analytics.jpg" />
     <Content Include="static\images\analytics2.jpg" />
     <Content Include="static\images\artists.jpg" />
-    <Content Include="static\images\Banner.png" />
     <Content Include="static\images\binoculars.jpg" />
     <Content Include="static\images\genres.jpg" />
     <Content Include="static\images\lightbulb.jpg" />
